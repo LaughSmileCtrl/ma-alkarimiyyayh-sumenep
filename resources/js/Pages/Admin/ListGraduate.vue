@@ -102,8 +102,27 @@ export default {
         },
         editData() {
             this.$swal({
-                title: 'Ubah Data',
-                html: this.formHtml,
+                title: 'Ubah Data Alumni',
+                html:
+                `<div class="form-control mx-1 mb-1">
+                    <label class="label">
+                        <span class="label-text md:text-lg">NISN</span>
+                    </label> 
+                    <input id="nisn" type="text" value=" + student.nisn + " placeholder="NISN" class="input input-primary input-bordered w-full">
+                </div>
+                <div class="form-control mx-1 mb-1">
+                    <label class="label">
+                        <span class="label-text md:text-lg">Nama</span>
+                    </label> 
+                    <input id="name" type="text" value=" + student.name + " placeholder="nama" class="input input-primary input-bordered w-full">
+                </div>
+                <div class="form-control mx-1 mb-1">
+                    <label class="label">
+                        <span class="label-text md:text-lg">Tahun Lulus</span>
+                    </label> 
+                    <input id="year" type="text" value=" + student.year + " placeholder="Lulus" class="input input-primary input-bordered w-full">
+                </div>
+                `,
                 confirmButtonText: 'Simpan',
                 cancelButtonText: 'Batal',
                 showCloseButton: true,
@@ -111,14 +130,10 @@ export default {
                 reverseButtons: true,
                 confirmButtonColor: '#2ECC71',
                 preConfirm: () => {
-                    var visibility = (this.visibilityOption)
-                        ? document.getElementById('visibility').value
-                        : null;
-
                     return [
                         document.getElementById('name').value,
-                        document.getElementById('file').value,
-                        visibility,
+                        document.getElementById('nisn').value,
+                        document.getElementById('year').value,
                     ]
                 }
             }).then(value => {

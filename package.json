@@ -32,7 +32,6 @@
         "@vueup/vue-quill": "^1.0.0-beta.7",
         "aos": "^3.0.0-beta.6",
         "daisyui": "^1.22.0",
-        "quill-image-compress": "^1.2.21",
         "swiper": "^7.2.0",
         "vue-sweetalert2": "^5.0.2"
     }

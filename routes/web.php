@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\StudentCreationController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -59,16 +61,12 @@ Route::get('/graduate', function () {
     return Inertia::render('Profile/Graduate');
 })->name('graduate');
 
-Route::get('/news', function () {
+Route::get('/our-news', function () {
     return Inertia::render('Profile/News');
 })->name('news');
 
-Route::get('/student-creation', function () {
-    return Inertia::render('Profile/StudentCreation');
-})->name('student-creation');
-
 Route::get('/news-detail', function () {
-    return Inertia::render('Profile/NewsDetail');
+    return Inertia::render('Profile/Artikel');
 })->name('news-detail');
 
 Route::get('/ppdb', function () {
@@ -142,33 +140,9 @@ Route::get('/certificate', function () {
     ]);
 })->name('certificate');
 
-Route::get('/news/index', function () {
-    return Inertia::render('Admin/Article/Index', [
-        'title' => 'Berita',
-        'create' => route('news.create'),
-    ]);
-})->name('news.index');
 
-Route::get('/news/create', function () {
-    return Inertia::render('Admin/Article/Form', [
-        'title' => 'Tambah Berita',
-        'back' => route('news.index'),
-    ]);
-})->name('news.create');
 
-Route::get('/student-creation/index', function () {
-    return Inertia::render('Admin/Article/Index', [
-        'title' => 'Karya Siswa',
-        'create' => route('student-creation.create'),
-    ]);
-})->name('student-creation.index');
 
-Route::get('/student-creation/create', function () {
-    return Inertia::render('Admin/Article/Form', [
-        'title' => 'Tambah Karya Siswa',
-        'back' => route('student-creation.index'),
-    ]);
-})->name('student-creation.create');
 
 
 
@@ -187,6 +161,12 @@ Route::get('/ppdb/edit', function () {
 Route::get('/ppdb/settings', function () {
     return Inertia::render('Admin/PPDB/Settings');
 })->name('ppdb.settings');
+
+
+
+Route::resource('news', NewsController::class);
+
+Route::resource('student-creation', StudentCreationController::class);
 
 
 

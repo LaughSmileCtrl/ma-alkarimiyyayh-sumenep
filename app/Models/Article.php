@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'author',
+        'content',
+        'type_id',
+    ];
+
+    protected $attributes = [
+        'image' => 'default.png',
+        'author' => 'Admin',
+    ];
 }

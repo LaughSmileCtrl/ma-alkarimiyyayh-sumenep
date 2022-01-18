@@ -14,7 +14,11 @@ class ArticleFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->words(6, true),
+            'type_id' => rand(1, 2),
+            'author' => $this->faker->name(),
+            'image' => 'default.png',
+            'content' => $this->faker->paragraphs(30, true),
         ];
     }
 }
