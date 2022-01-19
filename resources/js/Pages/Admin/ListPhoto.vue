@@ -76,10 +76,6 @@ export default {
             default: true,
             type: Boolean,
         },
-        visibilityOption: {
-            default: true,
-            type: Boolean,
-        },
         fileFormat: '',
     },
     methods: {
@@ -94,14 +90,9 @@ export default {
                 reverseButtons: true,
                 confirmButtonColor: '#2ECC71',
                 preConfirm: () => {
-                    var visibility = (this.visibilityOption)
-                        ? document.getElementById('visibility').value
-                        : null;
-
                     return [
                         document.getElementById('name').value,
                         document.getElementById('file').value,
-                        visibility,
                     ]
                 }
             }).then(value => {
@@ -119,14 +110,9 @@ export default {
                 reverseButtons: true,
                 confirmButtonColor: '#2ECC71',
                 preConfirm: () => {
-                    var visibility = (this.visibilityOption)
-                        ? document.getElementById('visibility').value
-                        : null;
-
                     return [
                         document.getElementById('name').value,
                         document.getElementById('file').value,
-                        visibility,
                     ]
                 }
             }).then(value => {
@@ -183,25 +169,8 @@ export default {
                     </label>
                     <input id="file" type="file" accept="` + this.fileFormat + `" class="">
                 </div>`
-            
-            var option = `
-                <div class="form-control mx-1 mb-1">
-                    <label class="label">
-                        <span class="label-text md:text-lg">Visibilitas</span>
-                    </label> 
-                    <select id="visibility" class="select select-bordered select-primary w-full">
-                        <option disabled="disabled" selected="selected">Pilih Visibilitas</option> 
-                        <option value="1">Publik</option> 
-                        <option value="0">Privat</option> 
-                    </select>
-                </div>
-            `
 
-            var result = (this.nameOption) ? name : ''
-            result += file
-            result += (this.visibilityOption) ? option : ''
-
-            return result;
+            return name + file;
         }
     }
 }

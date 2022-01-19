@@ -21373,14 +21373,16 @@ __webpack_require__.r(__webpack_exports__);
       "default": 'artikel',
       type: String
     },
-    create: {
-      required: true
-    },
     articles: {
       type: Object
-    }
+    },
+    errors: Object
   },
   methods: {
+    removeSearchQuery: function removeSearchQuery() {
+      this.searchQuery = '';
+      this.query(this.articles.path);
+    },
     query: function query(url) {
       this.$inertia.get(url, {
         search: this.searchQuery
@@ -21389,12 +21391,12 @@ __webpack_require__.r(__webpack_exports__);
         preserveState: true
       });
     },
-    deleteData: function deleteData(id) {
+    deleteData: function deleteData(article) {
       var _this = this;
 
       this.$swal({
         title: "Anda yakin?",
-        text: "Apakah anda benar-benar yakin akan menghapus data ini?",
+        text: "Apakah anda benar-benar yakin akan menghapus ".concat(article.title, " ?"),
         icon: "question",
         showCloseButton: true,
         showCancelButton: true,
@@ -21404,14 +21406,14 @@ __webpack_require__.r(__webpack_exports__);
         reverseButtons: true
       }).then(function (result) {
         if (result.isConfirmed) {
-          _this.$inertia["delete"](_this.articles.path + '/' + id, {
+          _this.$inertia["delete"](_this.articles.path + '/' + article.id, {
             onSuccess: function onSuccess(page) {
               _this.$swal('Berhasil Terhapus', page.props.flash.message, 'success');
 
               _this.$inertia.get(_this.links.back);
             },
             onError: function onError(message) {
-              _this.$swal('Gagal Menghapus', message, 'error');
+              _this.$swal('Gagal Menghapus', _this.errors, 'error');
             }
           });
         }
@@ -21779,68 +21781,125 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var _Layouts_Authenticated_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/Authenticated.vue */ "./resources/js/Layouts/Authenticated.vue");
+/* harmony import */ var _Components_Pagination_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Components/Pagination.vue */ "./resources/js/Components/Pagination.vue");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     AuthenticatedLayout: _Layouts_Authenticated_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.Head,
-    Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.Link
+    Pagination: _Components_Pagination_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  data: function data() {
+    return {
+      searchQuery: '',
+      yearSelected: ''
+    };
   },
   props: {
-    title: '',
-    nameOption: {
-      "default": true,
-      type: Boolean
+    title: {
+      "default": ''
     },
-    visibilityOption: {
-      "default": true,
-      type: Boolean
+    fileFormat: {
+      "default": ''
     },
-    fileFormat: ''
+    years: Array,
+    graduates: Object,
+    errors: Object
   },
   methods: {
+    removeYearSelected: function removeYearSelected() {
+      this.yearSelected = '';
+      this.query(this.graduates.path);
+    },
+    removeSearchQuery: function removeSearchQuery() {
+      this.searchQuery = '';
+      this.query(this.graduates.path);
+    },
+    query: function query(url) {
+      this.$inertia.get(url, {
+        search: this.searchQuery,
+        year: this.yearSelected
+      }, {
+        only: ['graduates'],
+        preserveState: true
+      });
+    },
     addData: function addData() {
       var _this = this;
 
       this.$swal({
         title: 'Tambah File Baru',
-        html: this.formHtml,
+        input: 'file',
+        inputAttributes: {
+          'accept': 'text/csv',
+          'aria-label': 'Unggah file CSV Alumni'
+        },
         confirmButtonText: 'Simpan',
         cancelButtonText: 'Batal',
         showCancelButton: true,
-        reverseButtons: true,
-        preConfirm: function preConfirm() {
-          var visibility = _this.visibilityOption ? document.getElementById('visibility').value : null;
-          return [document.getElementById('name').value, document.getElementById('file').value, visibility];
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value != null) {
+          _this.$inertia.post(_this.graduates.path, {
+            file: result.value
+          }, {
+            onSuccess: function onSuccess(page) {
+              _this.$swal('Berhasil Menambah Alumni', page.props.flash.message, 'success');
+            },
+            onError: function onError() {
+              var message = '<ul class="list-disc text-red-500 text-sm">';
+              Object.values(_this.errors).forEach(function (value) {
+                message += '<li>' + value + '</li>';
+              });
+              message += '</ul>';
+
+              _this.$swal({
+                title: 'Gagal Menambah Alumni',
+                icon: 'error',
+                html: message
+              });
+            }
+          });
         }
-      }).then(function (value) {
-        console.log(value.value);
       });
     },
-    editData: function editData() {
+    editData: function editData(graduate) {
+      var _this2 = this;
+
       this.$swal({
         title: 'Ubah Data Alumni',
-        html: "<div class=\"form-control mx-1 mb-1\">\n                    <label class=\"label\">\n                        <span class=\"label-text md:text-lg\">NISN</span>\n                    </label> \n                    <input id=\"nisn\" type=\"text\" value=\" + student.nisn + \" placeholder=\"NISN\" class=\"input input-primary input-bordered w-full\">\n                </div>\n                <div class=\"form-control mx-1 mb-1\">\n                    <label class=\"label\">\n                        <span class=\"label-text md:text-lg\">Nama</span>\n                    </label> \n                    <input id=\"name\" type=\"text\" value=\" + student.name + \" placeholder=\"nama\" class=\"input input-primary input-bordered w-full\">\n                </div>\n                <div class=\"form-control mx-1 mb-1\">\n                    <label class=\"label\">\n                        <span class=\"label-text md:text-lg\">Tahun Lulus</span>\n                    </label> \n                    <input id=\"year\" type=\"text\" value=\" + student.year + \" placeholder=\"Lulus\" class=\"input input-primary input-bordered w-full\">\n                </div>\n                ",
+        html: "<div class=\"form-control mx-1 mb-1\">\n                    <label class=\"label\">\n                        <span class=\"label-text md:text-lg\">NISN</span>\n                    </label> \n                    <input id=\"nisn\" type=\"text\" value=\"".concat(graduate.nisn, "\" placeholder=\"NISN\" class=\"input input-primary input-bordered w-full\">\n                </div>\n                <div class=\"form-control mx-1 mb-1\">\n                    <label class=\"label\">\n                        <span class=\"label-text md:text-lg\">Nama</span>\n                    </label> \n                    <input id=\"name\" type=\"text\" value=\"").concat(graduate.name, "\" placeholder=\"nama\" class=\"input input-primary input-bordered w-full\">\n                </div>\n                <div class=\"form-control mx-1 mb-1\">\n                    <label class=\"label\">\n                        <span class=\"label-text md:text-lg\">Tahun Lulus</span>\n                    </label> \n                    <input id=\"year\" type=\"text\" value=\"").concat(graduate.year, "\" placeholder=\"Lulus\" class=\"input input-primary input-bordered w-full\">\n                </div>\n                "),
         confirmButtonText: 'Simpan',
         cancelButtonText: 'Batal',
         showCloseButton: true,
         showCancelButton: true,
         reverseButtons: true,
-        confirmButtonColor: '#2ECC71',
-        preConfirm: function preConfirm() {
-          return [document.getElementById('name').value, document.getElementById('nisn').value, document.getElementById('year').value];
-        }
+        confirmButtonColor: '#2ECC71'
       }).then(function (value) {
-        console.log(value.value);
+        if (value.isConfirmed) {
+          _this2.$inertia.patch(_this2.graduates.path + '/' + graduate.id, {
+            name: document.getElementById('name').value,
+            nisn: document.getElementById('nisn').value,
+            year: document.getElementById('year').value
+          }, {
+            onSuccess: function onSuccess(page) {
+              _this2.$swal('Berhasil Mengubah', page.props.flash.message, 'success');
+            },
+            onError: function onError() {
+              _this2.$swal('Gagal mengubah data', "<ul class=\"text-red-500 \">\n                                    <li>".concat(_this2.errors.nisn ? _this2.errors.nisn : '', "</li>\n                                    <li>").concat(_this2.errors.name ? _this2.errors.name : '', "</li>\n                                    <li>").concat(_this2.errors.year ? _this2.errors.year : '', "</li>\n                                </ul>"), 'error');
+            }
+          });
+        }
       });
     },
-    deleteData: function deleteData() {
-      var _this2 = this;
+    deleteData: function deleteData(graduate) {
+      var _this3 = this;
 
       this.$swal({
         title: "Anda yakin?",
-        text: "Apakah anda benar-benar yakin akan menghapus data ini?",
+        text: "Apakah anda benar-benar yakin akan menghapus ".concat(graduate.name, "?"),
         icon: "question",
         showCloseButton: true,
         showCancelButton: true,
@@ -21850,24 +21909,16 @@ __webpack_require__.r(__webpack_exports__);
         reverseButtons: true
       }).then(function (result) {
         if (result.isConfirmed) {
-          _this2.$swal({
-            text: 'data terhapus',
-            icon: 'success',
-            showCloseButton: true
+          _this3.$inertia["delete"](_this3.graduates.path + '/' + graduate.id, {
+            onSuccess: function onSuccess(page) {
+              _this3.$swal('Berhasil Menghapus', page.props.flash.message, 'success');
+            },
+            onError: function onError() {
+              _this3.$swal('Gagal menghapus data', '', 'error');
+            }
           });
         }
       });
-    }
-  },
-  computed: {
-    formHtml: function formHtml() {
-      var name = "\n                <div class=\"form-control mx-1 mb-1\">\n                    <label class=\"label\">\n                        <span class=\"label-text md:text-lg\">Nama File</span>\n                    </label> \n                    <input id=\"name\" type=\"text\" placeholder=\"(default nama asli file)\" class=\"input input-primary input-bordered w-full\">\n                </div>";
-      var file = "\n                <div class=\"form-control mx-1 mb-1\">\n                    <label for=\"file\" class=\"label\">\n                        <span class=\"label-text md:text-lg\">File</span>\n                    </label>\n                    <input id=\"file\" type=\"file\" accept=\"" + this.fileFormat + "\" class=\"\">\n                </div>";
-      var option = "\n                <div class=\"form-control mx-1 mb-1\">\n                    <label class=\"label\">\n                        <span class=\"label-text md:text-lg\">Visibilitas</span>\n                    </label> \n                    <select id=\"visibility\" class=\"select select-bordered select-primary w-full\">\n                        <option disabled=\"disabled\" selected=\"selected\">Pilih Visibilitas</option> \n                        <option value=\"1\">Publik</option> \n                        <option value=\"0\">Privat</option> \n                    </select>\n                </div>\n            ";
-      var result = this.nameOption ? name : '';
-      result += file;
-      result += this.visibilityOption ? option : '';
-      return result;
     }
   }
 });
@@ -21901,16 +21952,10 @@ __webpack_require__.r(__webpack_exports__);
       "default": true,
       type: Boolean
     },
-    visibilityOption: {
-      "default": true,
-      type: Boolean
-    },
     fileFormat: ''
   },
   methods: {
     addData: function addData() {
-      var _this = this;
-
       this.$swal({
         title: 'Tambah File Baru',
         html: this.formHtml,
@@ -21921,16 +21966,13 @@ __webpack_require__.r(__webpack_exports__);
         reverseButtons: true,
         confirmButtonColor: '#2ECC71',
         preConfirm: function preConfirm() {
-          var visibility = _this.visibilityOption ? document.getElementById('visibility').value : null;
-          return [document.getElementById('name').value, document.getElementById('file').value, visibility];
+          return [document.getElementById('name').value, document.getElementById('file').value];
         }
       }).then(function (value) {
         console.log(value.value);
       });
     },
     editData: function editData() {
-      var _this2 = this;
-
       this.$swal({
         title: 'Ubah Data',
         html: this.formHtml,
@@ -21941,8 +21983,7 @@ __webpack_require__.r(__webpack_exports__);
         reverseButtons: true,
         confirmButtonColor: '#2ECC71',
         preConfirm: function preConfirm() {
-          var visibility = _this2.visibilityOption ? document.getElementById('visibility').value : null;
-          return [document.getElementById('name').value, document.getElementById('file').value, visibility];
+          return [document.getElementById('name').value, document.getElementById('file').value];
         }
       }).then(function (value) {
         console.log(value.value);
@@ -21957,7 +21998,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     deleteData: function deleteData() {
-      var _this3 = this;
+      var _this = this;
 
       this.$swal({
         title: "Anda yakin?",
@@ -21971,7 +22012,7 @@ __webpack_require__.r(__webpack_exports__);
         reverseButtons: true
       }).then(function (result) {
         if (result.isConfirmed) {
-          _this3.$swal({
+          _this.$swal({
             text: 'data terhapus',
             icon: 'success',
             showCloseButton: true
@@ -21984,11 +22025,7 @@ __webpack_require__.r(__webpack_exports__);
     formHtml: function formHtml() {
       var name = "\n                <div class=\"form-control mx-1 mb-1\">\n                    <label class=\"label\">\n                        <span class=\"label-text md:text-lg\">Nama File</span>\n                    </label> \n                    <input id=\"name\" type=\"text\" placeholder=\"(default nama asli file)\" class=\"input input-primary input-bordered w-full\">\n                </div>";
       var file = "\n                <div class=\"form-control mx-1 mb-1\">\n                    <label for=\"file\" class=\"label\">\n                        <span class=\"label-text md:text-lg\">File</span>\n                    </label>\n                    <input id=\"file\" type=\"file\" accept=\"" + this.fileFormat + "\" class=\"\">\n                </div>";
-      var option = "\n                <div class=\"form-control mx-1 mb-1\">\n                    <label class=\"label\">\n                        <span class=\"label-text md:text-lg\">Visibilitas</span>\n                    </label> \n                    <select id=\"visibility\" class=\"select select-bordered select-primary w-full\">\n                        <option disabled=\"disabled\" selected=\"selected\">Pilih Visibilitas</option> \n                        <option value=\"1\">Publik</option> \n                        <option value=\"0\">Privat</option> \n                    </select>\n                </div>\n            ";
-      var result = this.nameOption ? name : '';
-      result += file;
-      result += this.visibilityOption ? option : '';
-      return result;
+      return name + file;
     }
   }
 });
@@ -24710,9 +24747,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["href"])], 2
   /* CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)('ml-4 ' + $options.linkSideBarClassify(_ctx.route().current('graduate')))
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)('ml-4 ' + $options.linkSideBarClassify(_ctx.route().current('graduates.index')))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-    href: _ctx.route('graduate'),
+    href: _ctx.route('graduates.index'),
     "class": "h-full w-full"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -24806,9 +24843,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["href"])], 2
   /* CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)('ml-4 ' + $options.linkSideBarClassify(_ctx.route().current('student-creation.index')))
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)('ml-4 ' + $options.linkSideBarClassify(_ctx.route().current('student-creations.index')))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-    href: _ctx.route('student-creation.index'),
+    href: _ctx.route('student-creations.index'),
     "class": "h-full w-full"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -25163,7 +25200,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "w-full flex flex-col jastify-end gap-5"
+  "class": "w-full flex flex-col jastify-end gap-x-5 gap-y-1"
 };
 var _hoisted_2 = {
   "class": "flex flex-wrap gap-5"
@@ -25172,56 +25209,74 @@ var _hoisted_2 = {
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Tambah");
 
 var _hoisted_4 = {
-  "class": "overflow-x-scroll h-fit overflow-y-hidden"
+  "class": "flex justify-end gap-x-3 ml-auto mr-0 mb-3"
 };
 var _hoisted_5 = {
-  "class": "table w-full"
+  "class": "w-36 md:w-56"
+};
+var _hoisted_6 = {
+  key: 0,
+  "class": "badge text-xs"
 };
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Tanggal Dibuat"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Judul"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Penulis"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Aksi")])], -1
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fas fa-times"
+}, null, -1
 /* HOISTED */
 );
 
-var _hoisted_7 = {
+var _hoisted_8 = [_hoisted_7];
+var _hoisted_9 = {
+  "class": "overflow-x-scroll h-fit overflow-y-hidden"
+};
+var _hoisted_10 = {
+  "class": "table w-full"
+};
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Tanggal Dibuat"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Judul"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Penulis"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Aksi")])], -1
+/* HOISTED */
+);
+
+var _hoisted_12 = {
   "class": "flex flex-row gap-2"
 };
-var _hoisted_8 = {
+var _hoisted_13 = {
   "data-tip": "lihat detail",
   "class": "tooltip tooltip-bottom"
 };
-var _hoisted_9 = ["href"];
+var _hoisted_14 = ["href"];
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fas fa-external-link-alt"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_11 = [_hoisted_10];
-var _hoisted_12 = {
+var _hoisted_16 = [_hoisted_15];
+var _hoisted_17 = {
   "data-tip": "edit",
   "class": "tooltip tooltip-bottom"
 };
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fas fa-pen"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_14 = {
+var _hoisted_19 = {
   "data-tip": "hapus",
   "class": "tooltip tooltip-bottom"
 };
-var _hoisted_15 = ["onClick"];
+var _hoisted_20 = ["onClick"];
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fas fa-trash"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_17 = [_hoisted_16];
+var _hoisted_22 = [_hoisted_21];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
@@ -25243,7 +25298,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-        href: $props.create,
+        href: $props.articles.path + '/create',
         "class": "btn btn-primary"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -25266,7 +25321,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         placeholder: "Cari"
       }, null, 544
       /* HYDRATE_EVENTS, NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.searchQuery]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.articles.data, function (article, i) {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.searchQuery]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [$data.searchQuery ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.searchQuery) + " ", 1
+      /* TEXT */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        onClick: _cache[2] || (_cache[2] = function () {
+          return $options.removeSearchQuery && $options.removeSearchQuery.apply($options, arguments);
+        }),
+        "class": "btn-ghost btn-xs"
+      }, _hoisted_8)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.articles.data, function (article, i) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
           key: i
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.articles.from + i), 1
@@ -25287,32 +25349,32 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* TEXT */
         ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(article.author), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
           href: $props.articles.path + '/' + article.id,
           target: "_blank",
           "class": "btn btn-accent btn-sm"
-        }, _hoisted_11, 8
+        }, _hoisted_16, 8
         /* PROPS */
-        , _hoisted_9)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+        , _hoisted_14)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
           href: $props.articles.path + '/' + article.id + '/edit',
           "class": "btn btn-secondary btn-sm"
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [_hoisted_13];
+            return [_hoisted_18];
           }),
           _: 2
           /* DYNAMIC */
 
         }, 1032
         /* PROPS, DYNAMIC_SLOTS */
-        , ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        , ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
           onClick: function onClick($event) {
-            return $options.deleteData(article.id);
+            return $options.deleteData(article);
           },
           "class": "btn btn-error btn-sm"
-        }, _hoisted_17, 8
+        }, _hoisted_22, 8
         /* PROPS */
-        , _hoisted_15)])])]);
+        , _hoisted_20)])])]);
       }), 128
       /* KEYED_FRAGMENT */
       ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Pagination, {
@@ -25935,81 +25997,100 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "w-full flex flex-col jastify-end gap-5"
+  "class": "w-full"
 };
 var _hoisted_2 = {
-  "class": "flex flex-wrap gap-5"
+  "class": "mb-3 flex flex-col jastify-end gap-x-5 gap-y-1"
+};
+var _hoisted_3 = {
+  "class": "flex flex-wrap gap-x-5"
 };
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
-  "class": "select select-bordered select-primary w-36 md:w-56 bg-gray-50 shadow-inner shadow-gray-700/70 rounded-full ml-auto mr-0"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "",
   disabled: "disabled",
   selected: "selected"
-}, "Pilih Tahun"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "2020"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "2019"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", null, "2018")], -1
-/* HOISTED */
-);
-
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  type: "text",
-  "class": "input input-primary w-36 md:w-56 bg-gray-50 shadow-inner shadow-gray-700/70 rounded-full",
-  placeholder: "Cari"
-}, null, -1
+}, "Pilih Tahun", -1
 /* HOISTED */
 );
 
 var _hoisted_5 = {
-  "class": "overflow-x-scroll h-fit overflow-y-hidden"
+  "class": "flex justify-end gap-x-3 ml-auto mr-0"
 };
 var _hoisted_6 = {
+  "class": "w-36 md:w-56"
+};
+var _hoisted_7 = {
+  key: 0,
+  "class": "badge text-xs"
+};
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fas fa-times"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_9 = [_hoisted_8];
+var _hoisted_10 = {
+  "class": "w-36 md:w-56"
+};
+var _hoisted_11 = {
+  key: 0,
+  "class": "badge text-xs"
+};
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fas fa-times"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_13 = [_hoisted_12];
+var _hoisted_14 = {
+  "class": "overflow-x-scroll h-fit overflow-y-hidden"
+};
+var _hoisted_15 = {
   "class": "table w-full"
 };
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Tahun Lulus"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "NISN"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Nama"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Aksi")])], -1
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Tahun Lulus"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "NISN"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Nama"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Aksi")])], -1
 /* HOISTED */
 );
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, "2022", -1
-/* HOISTED */
-);
-
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, "00000000", -1
-/* HOISTED */
-);
-
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, "Quality Control Specialist", -1
-/* HOISTED */
-);
-
-var _hoisted_11 = {
+var _hoisted_17 = {
   "class": "flex flex-row gap-2"
 };
-var _hoisted_12 = {
+var _hoisted_18 = {
   "data-tip": "edit",
   "class": "tooltip tooltip-bottom"
 };
+var _hoisted_19 = ["onClick"];
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fas fa-pen"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_14 = [_hoisted_13];
-var _hoisted_15 = {
+var _hoisted_21 = [_hoisted_20];
+var _hoisted_22 = {
   "data-tip": "hapus",
   "class": "tooltip tooltip-bottom"
 };
+var _hoisted_23 = ["onClick"];
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fas fa-trash"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_17 = [_hoisted_16];
+var _hoisted_25 = [_hoisted_24];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
+
+  var _component_Pagination = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Pagination");
 
   var _component_AuthenticatedLayout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AuthenticatedLayout");
 
@@ -26024,30 +26105,89 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       )];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         onClick: _cache[0] || (_cache[0] = function () {
           return $options.addData && $options.addData.apply($options, arguments);
         }),
         "class": "btn btn-primary"
-      }, "Tambah"), _hoisted_3, _hoisted_4]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(10, function (i) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", {
-          key: i
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(i), 1
+      }, "Tambah"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+        onChange: _cache[1] || (_cache[1] = function ($event) {
+          return $options.query($props.graduates.path);
+        }),
+        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+          return $data.yearSelected = $event;
+        }),
+        "class": "select select-bordered select-primary w-36 md:w-56 bg-gray-50 shadow-inner shadow-gray-700/70 rounded-full ml-auto mr-0"
+      }, [_hoisted_4, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.years, function (year) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
+          key: year
+        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(year), 1
         /* TEXT */
-        ), _hoisted_8, _hoisted_9, _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-          onClick: _cache[1] || (_cache[1] = function () {
-            return $options.editData && $options.editData.apply($options, arguments);
-          }),
+        );
+      }), 128
+      /* KEYED_FRAGMENT */
+      ))], 544
+      /* HYDRATE_EVENTS, NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.yearSelected]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        onKeyup: _cache[3] || (_cache[3] = function ($event) {
+          return $options.query($props.graduates.path);
+        }),
+        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+          return $data.searchQuery = $event;
+        }),
+        type: "text",
+        "class": "input input-primary w-36 md:w-56 bg-gray-50 shadow-inner shadow-gray-700/70 rounded-full",
+        placeholder: "Cari"
+      }, null, 544
+      /* HYDRATE_EVENTS, NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.searchQuery]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [$data.yearSelected ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.yearSelected) + " ", 1
+      /* TEXT */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        onClick: _cache[5] || (_cache[5] = function () {
+          return $options.removeYearSelected && $options.removeYearSelected.apply($options, arguments);
+        }),
+        "class": "btn-ghost btn-xs"
+      }, _hoisted_9)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [$data.searchQuery ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.searchQuery) + " ", 1
+      /* TEXT */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        onClick: _cache[6] || (_cache[6] = function () {
+          return $options.removeSearchQuery && $options.removeSearchQuery.apply($options, arguments);
+        }),
+        "class": "btn-ghost btn-xs"
+      }, _hoisted_13)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.graduates.data, function (graduate, i) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
+          key: i
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.graduates.from + i), 1
+        /* TEXT */
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(graduate.year), 1
+        /* TEXT */
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(graduate.nisn), 1
+        /* TEXT */
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(graduate.name), 1
+        /* TEXT */
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+          onClick: function onClick($event) {
+            return $options.editData(graduate);
+          },
           "class": "btn btn-secondary btn-sm"
-        }, _hoisted_14)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-          onClick: _cache[2] || (_cache[2] = function () {
-            return $options.deleteData && $options.deleteData.apply($options, arguments);
-          }),
+        }, _hoisted_21, 8
+        /* PROPS */
+        , _hoisted_19)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+          onClick: function onClick($event) {
+            return $options.deleteData(graduate);
+          },
           "class": "btn btn-error btn-sm"
-        }, _hoisted_17)])])])]);
-      }), 64
-      /* STABLE_FRAGMENT */
-      ))])])])])];
+        }, _hoisted_25, 8
+        /* PROPS */
+        , _hoisted_23)])])])]);
+      }), 128
+      /* KEYED_FRAGMENT */
+      ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Pagination, {
+        links: $props.graduates.links,
+        onChangePage: $options.query
+      }, null, 8
+      /* PROPS */
+      , ["links", "onChangePage"])])];
     }),
     _: 1
     /* STABLE */

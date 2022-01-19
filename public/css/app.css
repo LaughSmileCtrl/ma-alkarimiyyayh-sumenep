@@ -674,6 +674,30 @@ html {
   align-items: center;
   justify-content: center;
 }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: .2s;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  height: 1.25rem;
+  font-size: .875rem;
+  line-height: 1.25rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding-left: .563rem;
+  padding-right: .563rem;
+  --tw-bg-opacity: 1;
+  background-color: hsla(var(--n) / var(--tw-bg-opacity, 1));
+  --tw-border-opacity: 1;
+  border-color: hsla(var(--n) / var(--tw-border-opacity, 1));
+  border-width: 1px;
+  --tw-text-opacity: 1;
+  color: hsla(var(--nc) / var(--tw-text-opacity, 1));
+  border-radius: var(--rounded-badge, 1.9rem);
+}
 .btn {
   border-color: transparent;
   border-color: hsla(var(--n) / var(--tw-border-opacity, 1));
@@ -2043,6 +2067,9 @@ html {
 .mt-5 {
   margin-top: 1.25rem;
 }
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
 .mt-1 {
   margin-top: 0.25rem;
 }
@@ -2072,9 +2099,6 @@ html {
 }
 .mt-12 {
   margin-top: 3rem;
-}
-.mb-3 {
-  margin-bottom: 0.75rem;
 }
 .mb-24 {
   margin-bottom: 6rem;
@@ -2420,6 +2444,17 @@ html {
 .gap-x-1 {
   -moz-column-gap: 0.25rem;
        column-gap: 0.25rem;
+}
+.gap-x-5 {
+  -moz-column-gap: 1.25rem;
+       column-gap: 1.25rem;
+}
+.gap-y-1 {
+  row-gap: 0.25rem;
+}
+.gap-x-3 {
+  -moz-column-gap: 0.75rem;
+       column-gap: 0.75rem;
 }
 .divide-y > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-y-reverse: 0;
@@ -2879,6 +2914,10 @@ html {
   --tw-text-opacity: 1;
   color: rgb(173 16 16 / var(--tw-text-opacity));
 }
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
 .text-green-600 {
   --tw-text-opacity: 1;
   color: rgb(42 187 103 / var(--tw-text-opacity));
@@ -2889,10 +2928,6 @@ html {
 }
 .text-transparent {
   color: transparent;
-}
-.text-red-500 {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 .underline {
   -webkit-text-decoration-line: underline;

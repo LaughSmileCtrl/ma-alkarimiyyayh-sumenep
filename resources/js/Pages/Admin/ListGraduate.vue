@@ -6,17 +6,28 @@
             {{ title }}
         </template>
 
-        <div class="w-full flex flex-col jastify-end gap-5">
-            <div class="flex flex-wrap gap-5">
-                <button @click="addData" class="btn btn-primary">Tambah</button>
-                <select class="select select-bordered select-primary w-36 md:w-56 bg-gray-50 shadow-inner shadow-gray-700/70 rounded-full ml-auto mr-0">
-                    <option disabled="disabled" selected="selected">Pilih Tahun</option> 
-                    <option>2020</option> 
-                    <option>2019</option> 
-                    <option>2018</option>
-                </select>
-                <input type="text" class="input input-primary w-36 md:w-56 bg-gray-50 shadow-inner shadow-gray-700/70 rounded-full" placeholder="Cari">
-
+        <div class="w-full">
+            <div class="mb-3 flex flex-col jastify-end gap-x-5 gap-y-1">
+                <div class="flex flex-wrap gap-x-5">
+                    <button @click="addData" class="btn btn-primary">Tambah</button>
+                    <select @change="query(graduates.path)" v-model="yearSelected" class="select select-bordered select-primary w-36 md:w-56 bg-gray-50 shadow-inner shadow-gray-700/70 rounded-full ml-auto mr-0">
+                        <option value="" disabled="disabled" selected="selected">Pilih Tahun</option>
+                        <option v-for="year in years" :key="year">{{ year }}</option>
+                    </select>
+                    <input @keyup="query(graduates.path)" v-model="searchQuery" type="text" class="input input-primary w-36 md:w-56 bg-gray-50 shadow-inner shadow-gray-700/70 rounded-full" placeholder="Cari" />
+                </div>
+                <div class="flex justify-end gap-x-3 ml-auto mr-0">
+                    <div class="w-36 md:w-56">
+                        <div v-if="yearSelected" class="badge text-xs">
+                        {{ yearSelected }} <button @click="removeYearSelected" class="btn-ghost btn-xs"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="w-36 md:w-56">
+                        <div v-if="searchQuery" class="badge text-xs">
+                        {{ searchQuery }} <button @click="removeSearchQuery" class="btn-ghost btn-xs"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="overflow-x-scroll h-fit overflow-y-hidden">
                 <table class="table w-full">
@@ -30,18 +41,18 @@
                         </tr>
                     </thead> 
                     <tbody>
-                        <tr v-for="i in 10" :key="i">
-                            <th>{{ i }}</th> 
-                            <td>2022</td>
-                            <td>00000000</td>
-                            <td>Quality Control Specialist</td>
+                        <tr v-for="(graduate, i) in graduates.data" :key="i">
+                            <th>{{ graduates.from + i }}</th> 
+                            <td>{{ graduate.year}}</td>
+                            <td>{{ graduate.nisn }}</td>
+                            <td>{{ graduate.name }}</td>
                             <td>
                                 <div class="flex flex-row gap-2">
                                     <div data-tip="edit" class="tooltip tooltip-bottom">
-                                        <button @click="editData" class="btn btn-secondary btn-sm"><i class="fas fa-pen"></i></button>
+                                        <button @click="editData(graduate)" class="btn btn-secondary btn-sm"><i class="fas fa-pen"></i></button>
                                     </div>
                                     <div data-tip="hapus" class="tooltip tooltip-bottom">
-                                        <button @click="deleteData" class="btn btn-error btn-sm"><i class="fas fa-trash"></i></button>
+                                        <button @click="deleteData(graduate)" class="btn btn-error btn-sm"><i class="fas fa-trash"></i></button>
                                     </div>
                                 </div>
                             </td>
@@ -49,58 +60,88 @@
                     </tbody>
                 </table>
             </div>
+             <Pagination :links="graduates.links" @changePage="query" />
         </div>
     </AuthenticatedLayout>
 </template>
 
 <script>
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import { Head } from '@inertiajs/inertia-vue3'
 import AuthenticatedLayout from '@/Layouts/Authenticated.vue'
+import Pagination from '@/Components/Pagination.vue'
 
 export default {
     components: {
         AuthenticatedLayout,
         Head,
-        Link,
+        Pagination,
+    },
+    data() {
+        return {
+            searchQuery: '',
+            yearSelected: '',
+        }
     },
     props: {
-        title: '',
-        nameOption: {
-            default: true,
-            type: Boolean,
+        title: {
+            default: ''
         },
-        visibilityOption: {
-            default: true,
-            type: Boolean,
+        fileFormat: {
+            default: ''
         },
-        fileFormat: '',
+        years:  Array,
+        graduates: Object,
+        errors: Object,
     },
     methods: {
+        removeYearSelected() {
+            this.yearSelected = ''
+            this.query(this.graduates.path);
+        },
+        removeSearchQuery() {
+            this.searchQuery = ''
+            this.query(this.graduates.path);
+        },
+        query(url) {
+            this.$inertia.get(url, {search: this.searchQuery, year: this.yearSelected}, {only: ['graduates'], preserveState: true,});
+        },
         addData() {
             this.$swal({
                 title: 'Tambah File Baru',
-                html: this.formHtml,
+                input: 'file',
+                inputAttributes: {
+                    'accept': 'text/csv',
+                    'aria-label': 'Unggah file CSV Alumni'
+                },
                 confirmButtonText: 'Simpan',
                 cancelButtonText: 'Batal',
-                
                 showCancelButton: true,
                 reverseButtons: true,
-                preConfirm: () => {
-                    var visibility = (this.visibilityOption)
-                        ? document.getElementById('visibility').value
-                        : null;
+            }).then(result => {
+                if(result.value != null) {
+                    this.$inertia.post(this.graduates.path, {file: result.value}, {
+                        onSuccess: (page) => {
+                            this.$swal('Berhasil Menambah Alumni', page.props.flash.message, 'success');
+                        },
+                        onError: () => {
+                            var message = '<ul class="list-disc text-red-500 text-sm">'
+                            Object.values(this.errors).forEach(value => {
+                                message += '<li>'+value+'</li>';
+                            });
 
-                    return [
-                        document.getElementById('name').value,
-                        document.getElementById('file').value,
-                        visibility,
-                    ]
+                            message += '</ul>'
+
+                            this.$swal({
+                                title: 'Gagal Menambah Alumni',
+                                icon: 'error',
+                                html: message,
+                            })
+                        }
+                    })
                 }
-            }).then(value => {
-                console.log(value.value);
             });
         },
-        editData() {
+        editData(graduate) {
             this.$swal({
                 title: 'Ubah Data Alumni',
                 html:
@@ -108,19 +149,19 @@ export default {
                     <label class="label">
                         <span class="label-text md:text-lg">NISN</span>
                     </label> 
-                    <input id="nisn" type="text" value=" + student.nisn + " placeholder="NISN" class="input input-primary input-bordered w-full">
+                    <input id="nisn" type="text" value="${graduate.nisn}" placeholder="NISN" class="input input-primary input-bordered w-full">
                 </div>
                 <div class="form-control mx-1 mb-1">
                     <label class="label">
                         <span class="label-text md:text-lg">Nama</span>
                     </label> 
-                    <input id="name" type="text" value=" + student.name + " placeholder="nama" class="input input-primary input-bordered w-full">
+                    <input id="name" type="text" value="${graduate.name}" placeholder="nama" class="input input-primary input-bordered w-full">
                 </div>
                 <div class="form-control mx-1 mb-1">
                     <label class="label">
                         <span class="label-text md:text-lg">Tahun Lulus</span>
                     </label> 
-                    <input id="year" type="text" value=" + student.year + " placeholder="Lulus" class="input input-primary input-bordered w-full">
+                    <input id="year" type="text" value="${graduate.year}" placeholder="Lulus" class="input input-primary input-bordered w-full">
                 </div>
                 `,
                 confirmButtonText: 'Simpan',
@@ -129,21 +170,34 @@ export default {
                 showCancelButton: true,
                 reverseButtons: true,
                 confirmButtonColor: '#2ECC71',
-                preConfirm: () => {
-                    return [
-                        document.getElementById('name').value,
-                        document.getElementById('nisn').value,
-                        document.getElementById('year').value,
-                    ]
+            }).then((value) => {
+                if (value.isConfirmed) {
+                    this.$inertia.patch(this.graduates.path+'/'+graduate.id, {
+                        name: document.getElementById('name').value,
+                        nisn: document.getElementById('nisn').value,
+                        year: document.getElementById('year').value,
+                    }, {
+                        onSuccess: (page) => {
+                            this.$swal('Berhasil Mengubah', page.props.flash.message, 'success');
+                        },
+                        onError: () => {
+                            this.$swal('Gagal mengubah data',
+                                `<ul class="text-red-500 ">
+                                    <li>${(this.errors.nisn) ? this.errors.nisn : '' }</li>
+                                    <li>${(this.errors.name) ? this.errors.name : '' }</li>
+                                    <li>${(this.errors.year) ? this.errors.year : '' }</li>
+                                </ul>`,
+                                'error'
+                            )
+                        }
+                    })
                 }
-            }).then(value => {
-                console.log(value.value);
-            });
+            })
         },
-        deleteData() {
+        deleteData(graduate) {
             this.$swal({
                 title: "Anda yakin?",
-                text: "Apakah anda benar-benar yakin akan menghapus data ini?",
+                text: `Apakah anda benar-benar yakin akan menghapus ${graduate.name}?`,
                 icon: "question",
                 showCloseButton: true,
                 showCancelButton: true,
@@ -153,52 +207,18 @@ export default {
                 reverseButtons: true,
             }).then((result) => {
                 if (result.isConfirmed) {                            
-                    this.$swal({
-                        text: 'data terhapus', 
-                        icon: 'success',
-                        showCloseButton: true,
-                    });
+                    this.$inertia.delete(this.graduates.path+'/'+graduate.id, {
+                        onSuccess: (page) => {
+                            this.$swal('Berhasil Menghapus', page.props.flash.message, 'success');
+                        },
+                        onError: () => {
+                            this.$swal('Gagal menghapus data','','error'
+                            )
+                        }
+                    })
                 }
             });
         }
     },
-    computed: {
-        formHtml() {
-            var name = `
-                <div class="form-control mx-1 mb-1">
-                    <label class="label">
-                        <span class="label-text md:text-lg">Nama File</span>
-                    </label> 
-                    <input id="name" type="text" placeholder="(default nama asli file)" class="input input-primary input-bordered w-full">
-                </div>`
-                
-            var file = `
-                <div class="form-control mx-1 mb-1">
-                    <label for="file" class="label">
-                        <span class="label-text md:text-lg">File</span>
-                    </label>
-                    <input id="file" type="file" accept="` + this.fileFormat + `" class="">
-                </div>`
-            
-            var option = `
-                <div class="form-control mx-1 mb-1">
-                    <label class="label">
-                        <span class="label-text md:text-lg">Visibilitas</span>
-                    </label> 
-                    <select id="visibility" class="select select-bordered select-primary w-full">
-                        <option disabled="disabled" selected="selected">Pilih Visibilitas</option> 
-                        <option value="1">Publik</option> 
-                        <option value="0">Privat</option> 
-                    </select>
-                </div>
-            `
-
-            var result = (this.nameOption) ? name : ''
-            result += file
-            result += (this.visibilityOption) ? option : ''
-
-            return result;
-        }
-    }
 }
 </script>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\GraduateController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\StudentCreationController;
 use Illuminate\Foundation\Application;
@@ -111,15 +112,6 @@ Route::get('/gallery/index', function () {
     ]);
 })->name('gallery.index');
 
-Route::get('/graduate', function () {
-    return Inertia::render('Admin/ListGraduate', [
-        'title' => 'Data Alumni',
-        'fileFormat' => 'text/csv',
-        'nameOption' => false,
-        'visibilityOption' => false,
-    ]);
-})->name('graduate');
-
 Route::get('/in-mail', function () {
     return Inertia::render('Admin/ListFile', [
         'title' => 'Surat Masuk'
@@ -139,12 +131,6 @@ Route::get('/certificate', function () {
         'nameOption' => false,
     ]);
 })->name('certificate');
-
-
-
-
-
-
 
 Route::get('/ppdb/index', function () {
     return Inertia::render('Admin/PPDB/Index');
@@ -166,8 +152,10 @@ Route::get('/ppdb/settings', function () {
 
 Route::resource('news', NewsController::class);
 
-Route::resource('student-creation', StudentCreationController::class);
+Route::resource('student-creations', StudentCreationController::class);
 
+Route::resource('graduates', GraduateController::class)
+    ->except(['create', 'show', 'edit']);
 
 
 // Route::get('/dashboard', function () {

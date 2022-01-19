@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreArticleRequest;
+use App\Http\Requests\Admin\StoreArticleRequest;
 use App\Models\Article;
 use App\Models\ArticleCategory;
 use Illuminate\Http\Request;
@@ -22,11 +22,12 @@ class StudentCreationController extends Controller
             ->when($request->search, function($query, $search) {
                 return $query->where('title', 'LIKE', '%'.$search.'%');
             })
+            ->orderBy('created_at', 'desc')
             ->paginate(25);
 
         return Inertia::render('Admin/Article/Index', [
             'title' => 'Karya Siswa',
-            'create' => route('student-creation.create'),
+            'create' => route('student-creations.create'),
             'articles' => $studentCreation,
         ]);
     }
@@ -37,8 +38,8 @@ class StudentCreationController extends Controller
         return Inertia::render('Admin/Article/Form', [
             'title' => 'Tambah Karya Siswa',
             'links' => [
-                'back' => route('student-creation.index'),
-                'save' => route('student-creation.store'),
+                'back' => route('student-creations.index'),
+                'save' => route('student-creations.store'),
             ],
             'authorOption' => true,
         ]);
@@ -85,8 +86,8 @@ class StudentCreationController extends Controller
             'title' => 'Ubah Karya Siswa',
             'article' => $article,
             'links' => [
-                'back' => route('student-creation.index'),
-                'save' => route('student-creation.update', $id),
+                'back' => route('student-creations.index'),
+                'save' => route('student-creations.update', $id),
             ],
             'authorOption' => true,
         ]);

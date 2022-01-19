@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreArticleRequest;
+use App\Http\Requests\Admin\StoreArticleRequest;
 use App\Models\Article;
 use App\Models\ArticleCategory;
 use Illuminate\Http\Request;
@@ -22,6 +22,7 @@ class NewsController extends Controller
             ->when($request->search, function($query, $search) {
                 return $query->where('title', 'LIKE', '%'.$search.'%');
             })
+            ->orderBy('created_at', 'desc')
             ->paginate(25);
 
         return Inertia::render('Admin/Article/Index', [

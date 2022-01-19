@@ -37,7 +37,7 @@
                                 <ul class="border-y border-white">
                                     <li class="p-3 font-medium">Kesiswaan</li>
                                     <li :class="'ml-4 ' + linkSideBarClassify(route().current('achivement'))"> <Link :href="route('achivement')" class="h-full w-full"><i class="fas fa-trophy w-5"></i> &nbsp; Prestasi</Link></li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('graduate'))"> <Link :href="route('graduate')" class="h-full w-full"><i class="fas fa-graduation-cap w-5"></i> &nbsp; Alumni</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('graduates.index'))"> <Link :href="route('graduates.index')" class="h-full w-full"><i class="fas fa-graduation-cap w-5"></i> &nbsp; Alumni</Link></li>
                                 </ul>
                                
                             </li>
@@ -55,7 +55,7 @@
                                 <ul class="border-y border-white">
                                     <li class="p-3 font-medium">Artikel</li>
                                     <li :class="'ml-4 ' + linkSideBarClassify(route().current('news.index'))"><Link :href="route('news.index')" class="h-full w-full"> <i class="fas fa-newspaper w-5"></i> &nbsp; Berita</Link></li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('student-creation.index'))"><Link :href="route('student-creation.index')" class="h-full w-full"> <i class="fas fa-file-alt w-5"></i> &nbsp; Karya Siswa</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('student-creations.index'))"><Link :href="route('student-creations.index')" class="h-full w-full"> <i class="fas fa-file-alt w-5"></i> &nbsp; Karya Siswa</Link></li>
                                 </ul>
                             </li>
                             <li>
