@@ -126,7 +126,15 @@ class StudentCreationController extends Controller
 
     public function destroy($id)
     {
-        Article::find($id)->delete();
+        $article = Article::findOrFail($id);
+
+        $photoName = $article->image;
+
+        if ($photoName != 'default.png') {
+            Storage::delete('/images/article/'.$article->image);
+        }
+        
+        $article->delete();
 
         return back()->with([
             'message' => 'Karya Siswa berhasil dihapus',

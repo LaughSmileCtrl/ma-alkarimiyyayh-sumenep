@@ -36,7 +36,7 @@
                             <li>
                                 <ul class="border-y border-white">
                                     <li class="p-3 font-medium">Kesiswaan</li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('achivement'))"> <Link :href="route('achivement')" class="h-full w-full"><i class="fas fa-trophy w-5"></i> &nbsp; Prestasi</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('achivements.index'))"> <Link :href="route('achivements.index')" class="h-full w-full"><i class="fas fa-trophy w-5"></i> &nbsp; Prestasi</Link></li>
                                     <li :class="'ml-4 ' + linkSideBarClassify(route().current('graduates.index'))"> <Link :href="route('graduates.index')" class="h-full w-full"><i class="fas fa-graduation-cap w-5"></i> &nbsp; Alumni</Link></li>
                                 </ul>
                                

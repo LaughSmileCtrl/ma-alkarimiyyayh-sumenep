@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AchivementController;
+use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\GraduateController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\StudentCreationController;
@@ -100,17 +102,9 @@ Route::get('/achivement', function () {
     return Inertia::render('Admin/ListPhoto', [
         'title' => 'Prestasi',
         'fileFormat' => 'image/*',
-        'visibilityOption' => false,
     ]);
 })->name('achivement');
 
-Route::get('/gallery/index', function () {
-    return Inertia::render('Admin/ListPhoto', [
-        'title' => 'Album',
-        'visibilityOption' => false,
-        'fileFormat' => 'image/*'
-    ]);
-})->name('gallery.index');
 
 Route::get('/in-mail', function () {
     return Inertia::render('Admin/ListFile', [
@@ -156,6 +150,13 @@ Route::resource('student-creations', StudentCreationController::class);
 
 Route::resource('graduates', GraduateController::class)
     ->except(['create', 'show', 'edit']);
+
+Route::resource('gallery', GalleryController::class)
+    ->except(['create', 'show', 'edit']);
+
+Route::resource('achivements', AchivementController::class)
+    ->except(['create', 'show', 'edit']);
+
 
 
 // Route::get('/dashboard', function () {

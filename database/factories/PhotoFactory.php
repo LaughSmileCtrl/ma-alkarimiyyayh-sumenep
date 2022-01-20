@@ -14,7 +14,10 @@ class PhotoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'type_id' => rand(1,2),
+            'title' => $this->faker->words(5, true),
+            'file' => 'default.png',
+            'created_at' => $this->faker->date(),
         ];
     }
 }

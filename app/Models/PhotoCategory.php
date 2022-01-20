@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ArticleCategory extends Model
+class PhotoCategory extends Model
 {
     use HasFactory;
 
-    public function articles()
+    public function photos()
     {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(Photo::class);
     }
 }
