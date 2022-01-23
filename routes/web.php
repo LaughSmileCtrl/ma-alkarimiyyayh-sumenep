@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\MailInController;
 use App\Http\Controllers\Admin\MailOutController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\StudentCreationController;
+use App\Http\Controllers\Admin\TeacherController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -140,6 +141,9 @@ Route::resource('mail-out', MailOutController::class)
 
 Route::resource('certificates', CertificateController::class)
     ->except(['create', 'edit']);
+
+Route::resource('teachers', TeacherController::class)
+    ->except(['create', 'show', 'edit']);
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Profile/Dashboard');

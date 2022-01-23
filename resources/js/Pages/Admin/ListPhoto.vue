@@ -45,7 +45,7 @@
                             <th>{{ photos.from + i }}</th> 
                             <td>
                                 <div class="w-16 h-16 rounded">
-                                    <img :src="'/images/photo/'+photo.file" :alt="photo.title">
+                                    <img :src="'/images/photo/'+photo.file" :alt="photo.title" class="w-16 h-16 object-contain">
                                 </div>
                             </td>
                             <td>
@@ -148,7 +148,13 @@ export default {
                         this.$swal('Berhasil Menyimpan', page.props.flash.message, 'success');
                     },
                     onError: (message) => {
-                        this.$swal('Gagal menyimpan', this.errors, 'error')
+                        this.$swal('Gagal mengubah data',
+                            `<ul class="text-red-500 ">
+                                <li>${(this.errors.title) ? this.errors.title : '' }</li>
+                                <li>${(this.errors.file) ? this.errors.file : '' }</li>
+                            </ul>`,
+                            'error'
+                        )
 
                     }
                 });
@@ -180,8 +186,13 @@ export default {
                         this.$swal('Berhasil mengubah', page.props.flash.message, 'success');
                     },
                     onError: (message) => {
-                        this.$swal('Gagal mengubah', this.errors, 'error')
-
+                        this.$swal('Gagal mengubah data',
+                            `<ul class="text-red-500 ">
+                                <li>${(this.errors.title) ? this.errors.title : '' }</li>
+                                <li>${(this.errors.file) ? this.errors.file : '' }</li>
+                            </ul>`,
+                            'error'
+                        )
                     }
                 });
             });

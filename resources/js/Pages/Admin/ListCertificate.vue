@@ -176,7 +176,13 @@ export default {
                         this.$swal('Berhasil mengubah', page.props.flash.message, 'success');
                     },
                     onError: (message) => {
-                        this.$swal('Gagal mengubah', this.errors, 'error')
+                        this.$swal('Gagal mengubah data',
+                                `<ul class="text-red-500 ">
+                                    <li>${(this.errors.title) ? this.errors.title : '' }</li>
+                                    <li>${(this.errors.file) ? this.errors.file : '' }</li>
+                                </ul>`,
+                                'error'
+                            )
 
                     }
                 });

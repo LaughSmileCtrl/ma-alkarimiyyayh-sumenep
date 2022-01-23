@@ -22,16 +22,6 @@
                     
                 </div>
             </div>
-
-            <div class="border shadow-inner shadow-gray-700/60 rounded-3xl w-4/5 h-fit p-7">
-                <h2 class="text-xl mb-5">Guru</h2>
-                <div class="grid grid-cols-2 gap-y-3 gap-x-1">
-                    <p class="text-gray-600">Import dari CSV</p>
-                    <button @click="uploadTeacherList" class="btn btn-primary"><i class="fas fa-cloud-upload-alt"></i> &nbsp; Unggah File</button>
-                    <p class="text-gray-600">Hapus Semua Guru</p>
-                    <button @click="destroyTeachers" class="btn btn-error btn-outline"><i class="fas fa-trash"></i> &nbsp; Hapus Semua</button>
-                </div>
-            </div>
         </div>
     </AuthenticatedLayout>
 </template>
