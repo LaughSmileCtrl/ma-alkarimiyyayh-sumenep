@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Settings;
+use App\Models\General;
 use Illuminate\Http\Request;
 
-class SettingsController extends Controller
+class GeneralController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class SettingsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Settings  $settings
+     * @param  \App\Models\General  $general
      * @return \Illuminate\Http\Response
      */
-    public function show(Settings $settings)
+    public function show(General $general)
     {
         //
     }
@@ -52,10 +52,10 @@ class SettingsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Settings  $settings
+     * @param  \App\Models\General  $general
      * @return \Illuminate\Http\Response
      */
-    public function edit(Settings $settings)
+    public function edit(General $general)
     {
         //
     }
@@ -64,10 +64,10 @@ class SettingsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Settings  $settings
+     * @param  \App\Models\General  $general
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Settings $settings)
+    public function update(Request $request, General $general)
     {
         //
     }
@@ -75,10 +75,10 @@ class SettingsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Settings  $settings
+     * @param  \App\Models\General  $general
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Settings $settings)
+    public function destroy(General $general)
     {
         //
     }

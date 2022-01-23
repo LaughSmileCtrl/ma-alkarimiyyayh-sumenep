@@ -32,7 +32,7 @@
                     </div>
                     <div class="my-3">
                         <ul class="list-none m-5" @click="hideDrawer">
-                            <li :class="linkSideBarClassify(route().current('dashboard'))"><Link :href="route('dashboard')" class="h-full w-full"> <i class="fas fa-home"></i> &nbsp; Dashboard</Link></li>
+                            <li :class="linkSideBarClassify(route().current('dashboard.index'))"><Link :href="route('dashboard.index')" class="h-full w-full"> <i class="fas fa-home"></i> &nbsp; Dashboard</Link></li>
                             <li :class="linkSideBarClassify(route().current('teachers.index'))"><Link :href="route('teachers.index')" class="h-full w-full"> <i class="fas fa-users"></i> &nbsp; Guru</Link></li>
                             <li>
                                 <ul class="border-y border-white">

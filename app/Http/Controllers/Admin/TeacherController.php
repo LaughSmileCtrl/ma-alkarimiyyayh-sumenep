@@ -42,6 +42,7 @@ class TeacherController extends Controller
             'message' => $request->name.' telah disimpan',
         ]);
     }
+    
 
     public function update(StoreTeacherRequest $request, Teacher $teacher)
     {

@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             PhotoCategorySeeder::class,
             PhotoSeeder::class,
             TeacherSeeder::class,
+            GeneralSeeder::class,
         ]);
     }
 }

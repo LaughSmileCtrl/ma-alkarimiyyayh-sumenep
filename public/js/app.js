@@ -21444,73 +21444,24 @@ __webpack_require__.r(__webpack_exports__);
     AuthenticatedLayout: _Layouts_Authenticated_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.Head
   },
+  data: function data() {
+    return {
+      form: this.$inertia.form(this.general)
+    };
+  },
+  props: {
+    general: Object
+  },
   methods: {
     saveGeneral: function saveGeneral() {
-      this.$swal({
-        text: 'Pengaturan tersimpan',
-        icon: 'success',
-        showCloseButton: true
-      });
-    },
-    destroyTeachers: function destroyTeachers() {
       var _this = this;
 
-      this.$swal({
-        title: "Anda yakin?",
-        text: "Anda akan menghapus semua guru?",
-        icon: "warning",
-        showCloseButton: true,
-        showCancelButton: true,
-        confirmButtonText: "Ya, hapus",
-        confirmButtonColor: '#ef4444',
-        cancelButtonText: "Tidak",
-        reverseButtons: true
-      }).then(function (result) {
-        if (result.isConfirmed) {
-          _this.$swal({
-            title: "Anda yakin?",
-            text: "Apakah anda benar-benar yakin akan menghapus semua guru?",
-            icon: "question",
-            showCloseButton: true,
-            showCancelButton: true,
-            confirmButtonText: "Ya, hapus",
-            confirmButtonColor: '#ef4444',
-            cancelButtonText: "Tidak",
-            reverseButtons: true
-          }).then(function (result) {
-            if (result.isConfirmed) {
-              _this.$swal({
-                text: 'Tersimpan',
-                icon: 'success',
-                showCloseButton: true
-              });
-            }
-          });
-        }
-      });
-    },
-    uploadTeacherList: function uploadTeacherList() {
-      this.$swal({
-        title: 'Pilih File CSV',
-        input: 'file',
-        inputAttributes: {
-          'accept': 'text/csv',
-          'aria-label': 'Unggah file CSV guru'
+      this.form.post(route('dashboard.index'), {
+        onSuccess: function onSuccess(page) {
+          _this.$swal('Berhasil Menyimpan', page.props.flash.message, 'success');
         },
-        confirmButtonText: 'Simpan',
-        showCloseButton: true
-      }).then(function (result) {
-        if (result.value != null) {// this.$inertia.post(route('voters.get-csv'), {
-          //     voters: result.value,
-          // }, {
-          //     onError: errors => {
-          //         this.$swal(errors.voters, '', 'error');
-          //     },
-          //     onSuccess: page => {
-          //         this.$swal(page.props.flash.message, '', 'success');
-          //         this.$inertia.reload({ only: ['voters'] })
-          //     }
-          // });
+        onError: function onError(message) {
+          _this.$swal('Gagal menyimpan pengaturan', 'silahkan cek kembali form pengaturan yang anda isi', 'error');
         }
       });
     }
@@ -25026,9 +24977,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return _ctx.hideDrawer && _ctx.hideDrawer.apply(_ctx, arguments);
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)($options.linkSideBarClassify(_ctx.route().current('dashboard')))
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)($options.linkSideBarClassify(_ctx.route().current('dashboard.index')))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-    href: _ctx.route('dashboard'),
+    href: _ctx.route('dashboard.index'),
     "class": "h-full w-full"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -25761,52 +25712,24 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  type: "text",
-  "class": "input input-primary bg-gray-100 focus:bg-white w-full"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "",
   "class": "text-lg mr-3"
 }, "Jumlah Siswa ", -1
 /* HOISTED */
 );
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  type: "text",
-  "class": "input input-primary bg-gray-100 focus:bg-white w-full"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "",
   "class": "text-lg mr-3"
 }, "Jumlah Alumni ", -1
 /* HOISTED */
 );
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  type: "text",
-  "class": "input input-primary bg-gray-100 focus:bg-white w-full"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "",
   "class": "text-lg mr-3 mt-7"
 }, "Nomor Whatsapp", -1
-/* HOISTED */
-);
-
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  type: "text",
-  "class": "input input-primary bg-gray-100 focus:bg-white w-full mt-7"
-}, null, -1
 /* HOISTED */
 );
 
@@ -25822,8 +25745,40 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [_hoisted_1];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, _hoisted_7, _hoisted_8, _hoisted_9, _hoisted_10, _hoisted_11, _hoisted_12, _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-        onClick: _cache[0] || (_cache[0] = function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+          return $data.form.total_graduate = $event;
+        }),
+        type: "text",
+        "class": "input input-primary bg-gray-100 focus:bg-white w-full"
+      }, null, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.total_graduate]]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+          return $data.form.total_teacher = $event;
+        }),
+        type: "text",
+        "class": "input input-primary bg-gray-100 focus:bg-white w-full"
+      }, null, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.total_teacher]]), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+          return $data.form.total_student = $event;
+        }),
+        type: "text",
+        "class": "input input-primary bg-gray-100 focus:bg-white w-full"
+      }, null, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.total_student]]), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+          return $data.form.whatsapp = $event;
+        }),
+        type: "text",
+        "class": "input input-primary bg-gray-100 focus:bg-white w-full mt-7"
+      }, null, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.whatsapp]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        onClick: _cache[4] || (_cache[4] = function () {
           return $options.saveGeneral && $options.saveGeneral.apply($options, arguments);
         }),
         "class": "btn btn-primary w-fit col-span-2 ml-auto mr-0 mt-5"

@@ -11,13 +11,13 @@
                 <h2 class="text-xl mb-5 font-semibold">Umum</h2>
                 <div class="grid grid-cols-2 gap-3 content-center">
                     <label for="" class="text-lg mr-3">Jumlah Guru </label>
-                    <input type="text" class="input input-primary bg-gray-100 focus:bg-white w-full" />
+                    <input v-model="form.total_graduate" type="text" class="input input-primary bg-gray-100 focus:bg-white w-full" />
                     <label for="" class="text-lg mr-3">Jumlah Siswa </label>
-                    <input type="text" class="input input-primary bg-gray-100 focus:bg-white w-full" />
+                    <input v-model="form.total_teacher" type="text" class="input input-primary bg-gray-100 focus:bg-white w-full" />
                     <label for="" class="text-lg mr-3">Jumlah Alumni </label>
-                    <input type="text" class="input input-primary bg-gray-100 focus:bg-white w-full" />
+                    <input v-model="form.total_student" type="text" class="input input-primary bg-gray-100 focus:bg-white w-full" />
                     <label for="" class="text-lg mr-3 mt-7">Nomor Whatsapp</label>
-                    <input type="text" class="input input-primary bg-gray-100 focus:bg-white w-full mt-7" />
+                    <input v-model="form.whatsapp" type="text" class="input input-primary bg-gray-100 focus:bg-white w-full mt-7" />
                     <button @click="saveGeneral" class="btn btn-primary w-fit col-span-2 ml-auto mr-0 mt-5">Simpan</button>
                     
                 </div>
@@ -35,75 +35,25 @@ export default {
         AuthenticatedLayout,
         Head,
     },
+    data() {
+        return {
+            form: this.$inertia.form(this.general),
+        }
+    },
+    props: {
+        general: Object,
+    },
     methods: {
         saveGeneral() {
-            this.$swal({
-                text: 'Pengaturan tersimpan', 
-                icon: 'success',
-                showCloseButton: true,
-            });
-        },
-        destroyTeachers() {
-            this.$swal({
-                title: "Anda yakin?",
-                text: "Anda akan menghapus semua guru?",
-                icon: "warning",
-                showCloseButton: true,
-                showCancelButton: true,
-                confirmButtonText: "Ya, hapus",
-                confirmButtonColor: '#ef4444',
-                cancelButtonText: "Tidak",
-                reverseButtons: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.$swal({
-                        title: "Anda yakin?",
-                        text: "Apakah anda benar-benar yakin akan menghapus semua guru?",
-                        icon: "question",
-                        showCloseButton: true,
-                        showCancelButton: true,
-                        confirmButtonText: "Ya, hapus",
-                        confirmButtonColor: '#ef4444',
-                        cancelButtonText: "Tidak",
-                        reverseButtons: true,
-                    }).then((result) => {
-                        if (result.isConfirmed) {                            
-                            this.$swal({
-                                text: 'Tersimpan', 
-                                icon: 'success',
-                                showCloseButton: true,
-                            });
-                        }
-                    });
-                }
-            });
-        },
-        uploadTeacherList() {
-            this.$swal({
-                title: 'Pilih File CSV',
-                input: 'file',
-                inputAttributes: {
-                    'accept': 'text/csv',
-                    'aria-label': 'Unggah file CSV guru'
+            this.form.post(route('dashboard.index'), {
+                onSuccess: (page) => {
+                    this.$swal('Berhasil Menyimpan', page.props.flash.message, 'success');
                 },
-                confirmButtonText: 'Simpan',
-                showCloseButton: true,
-            }).then(result => {
-                if(result.value != null) {
-                    // this.$inertia.post(route('voters.get-csv'), {
-                    //     voters: result.value,
-                    // }, {
-                    //     onError: errors => {
-                    //         this.$swal(errors.voters, '', 'error');
-                    //     },
-                    //     onSuccess: page => {
-                    //         this.$swal(page.props.flash.message, '', 'success');
-                    //         this.$inertia.reload({ only: ['voters'] })
-                    //     }
-                    // });
+                onError: (message) => {
+                    this.$swal('Gagal menyimpan pengaturan','silahkan cek kembali form pengaturan yang anda isi','error');
                 }
             });
-        }
+        },
     }
 }
 </script>
