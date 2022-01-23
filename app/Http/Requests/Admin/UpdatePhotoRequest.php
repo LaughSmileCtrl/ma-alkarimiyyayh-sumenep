@@ -6,26 +6,36 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdatePhotoRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+
     public function rules()
     {
         return [
-            'title' => 'required',
+            'title' => 'required|max:200',
             'file' => 'mimes:jpg,jpeg,gif,bmp,png',
+        ];
+    }
+
+
+    public function attributes()
+    {
+        return [
+            'title' => 'nama file',
+        ];
+    }
+
+
+    public function messages()
+    {
+        return [
+            'required' => ':attribute harus diisi',
+            'mimes' => ':attribute harus jpg,jpeg,gif,bmp atau png',
+            'max' => ':attribute maksimal 200 karakter'
         ];
     }
 }

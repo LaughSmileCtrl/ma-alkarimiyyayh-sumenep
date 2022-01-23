@@ -141,7 +141,7 @@ export default {
                 }
             }).then(value => {
                 this.$inertia.post(this.photos.path, {
-                    title: value.value[0],
+                    title: (value.value[0] != '') ? value.value[0] : document.getElementById('file').value.split('\\')[2],
                     file: value.value[1],
                 }, {
                     onSuccess: (page) => {

@@ -45,9 +45,9 @@
                                 <ul class="border-y border-white">
                                     <li class="p-3 font-medium">Arsip</li>
                                     <li :class="'ml-4 ' + linkSideBarClassify(route().current('gallery.index'))"> <Link :href="route('gallery.index')" class="h-full w-full"><i class="fas fa-border-all w-5"></i> &nbsp; Album</Link></li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('in-mail'))"> <Link :href="route('in-mail')" class="h-full w-full"><i class="fas fa-share w-5"></i> &nbsp; Surat Masuk</Link></li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('out-mail'))"> <Link :href="route('out-mail')" class="h-full w-full"><i class="fas fa-reply w-5"></i> &nbsp; Surat Keluar</Link></li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('certificate'))"> <Link :href="route('certificate')" class="h-full w-full"><i class="fas fa-file w-5"></i> &nbsp; Ijazah</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('mail-in.index'))"> <Link :href="route('mail-in.index')" class="h-full w-full"><i class="fas fa-share w-5"></i> &nbsp; Surat Masuk</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('mail-out.index'))"> <Link :href="route('mail-out.index')" class="h-full w-full"><i class="fas fa-reply w-5"></i> &nbsp; Surat Keluar</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('certificates.index'))"> <Link :href="route('certificates.index')" class="h-full w-full"><i class="fas fa-file w-5"></i> &nbsp; Ijazah</Link></li>
                                 </ul>
                                
                             </li>

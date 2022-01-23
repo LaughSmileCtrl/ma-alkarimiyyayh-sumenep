@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePhotoRequest extends FormRequest
+class StoreFileRequest extends FormRequest
 {
 
     public function authorize()
@@ -12,12 +12,13 @@ class StorePhotoRequest extends FormRequest
         return true;
     }
 
-
+    
     public function rules()
     {
         return [
-            'title' => 'required|max:200',
-            'file' => 'required|mimes:jpg,jpeg,gif,bmp,png',
+            'title' => 'required|max:255',
+            'file' => 'required|file',
+            'isPublic' => 'boolean|nullable',
         ];
     }
 
@@ -26,6 +27,7 @@ class StorePhotoRequest extends FormRequest
     {
         return [
             'title' => 'nama file',
+            'isPublic' => 'visibilitas',
         ];
     }
 
@@ -34,7 +36,8 @@ class StorePhotoRequest extends FormRequest
     {
         return [
             'required' => ':attribute harus diisi',
-            'mimes' => ':attribute harus jpg,jpeg,gif,bmp atau png',
+            'file' => ':attribute harus file',
+            'boolean' => ':attribute harus diisi',
             'max' => ':attribute maksimal 200 karakter'
         ];
     }

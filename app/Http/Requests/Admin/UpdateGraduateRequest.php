@@ -16,8 +16,8 @@ class UpdateGraduateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'nisn' => 'required',
+            'name' => 'required|max:200',
+            'nisn' => 'required|max:200',
             'year' => 'required',
         ];
     }
@@ -36,6 +36,7 @@ class UpdateGraduateRequest extends FormRequest
     {
         return [
             'required' => ':attribute harus diisi',
+            'max' => ':attribute maksimal 200 karakter'
         ];
     }
 }

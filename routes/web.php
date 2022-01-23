@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\AchivementController;
+use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\GraduateController;
+use App\Http\Controllers\Admin\MailInController;
+use App\Http\Controllers\Admin\MailOutController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\StudentCreationController;
 use Illuminate\Foundation\Application;
@@ -98,34 +101,6 @@ Route::get('/dashboard', function () {
     return Inertia::render('Admin/Dashboard');
 })->name('dashboard');
 
-Route::get('/achivement', function () {
-    return Inertia::render('Admin/ListPhoto', [
-        'title' => 'Prestasi',
-        'fileFormat' => 'image/*',
-    ]);
-})->name('achivement');
-
-
-Route::get('/in-mail', function () {
-    return Inertia::render('Admin/ListFile', [
-        'title' => 'Surat Masuk'
-    ]);
-})->name('in-mail');
-
-Route::get('/out-mail', function () {
-    return Inertia::render('Admin/ListFile', [
-        'title' => 'Surat Keluar'
-    ]);
-})->name('out-mail');
-
-Route::get('/certificate', function () {
-    return Inertia::render('Admin/ListCertificate', [
-        'title' => 'Ijazah',
-        'visibilityOption' => false,
-        'nameOption' => false,
-    ]);
-})->name('certificate');
-
 Route::get('/ppdb/index', function () {
     return Inertia::render('Admin/PPDB/Index');
 })->name('ppdb.index');
@@ -157,7 +132,14 @@ Route::resource('gallery', GalleryController::class)
 Route::resource('achivements', AchivementController::class)
     ->except(['create', 'show', 'edit']);
 
+Route::resource('mail-in', MailInController::class)
+    ->except(['create', 'edit']);
 
+Route::resource('mail-out', MailOutController::class)
+    ->except(['create', 'edit']);
+
+Route::resource('certificates', CertificateController::class)
+    ->except(['create', 'edit']);
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Profile/Dashboard');
