@@ -244,6 +244,20 @@ export default {
     },
     props: {
         registrar: Object,
+    },
+    methods: {
+        save() {
+            this.form.patch(route('ppdb-admin.update', this.registrar.id), {
+                onSuccess: (page) => {
+                    this.$swal('Berhasil Menyimpan', page.props.flash.message, 'success');
+                    this.$inertia.get(route('ppdb-admin.index'));
+                },
+                onError: (message) => {
+                    this.$swal('Gagal menyimpan data','cek kembali form yang anda isi','error')
+
+                }
+            });
+        }
     }
 }
 </script>

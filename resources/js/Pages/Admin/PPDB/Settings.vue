@@ -38,10 +38,10 @@
             </div>
             <div class="border shadow-inner shadow-gray-700/60 rounded-3xl w-full h-fit p-7">
                 <div class="grid grid-cols-2 gap-y-3 gap-x-1">
-                    <p class="text-gray-600">Hapus Semua Pendaftar</p>
-                    <button class="btn btn-error btn-outline"><i class="fas fa-trash"></i> &nbsp; Hapus Semua</button>
                     <p class="text-gray-600">Expor ke CSV</p>
-                    <button class="btn"><i class="fas fa-cloud-download-alt"></i> &nbsp; Unduh File</button>
+                    <a :href="route('ppdb-admin.export-all')" target="_blank" class="btn btn-primary"><i class="fas fa-cloud-download-alt"></i> &nbsp; Unduh File</a>
+                    <p class="text-gray-600">Hapus Semua Pendaftar</p>
+                    <button @click="deleteAll" class="btn btn-error btn-outline"><i class="fas fa-trash"></i> &nbsp; Hapus Semua</button>
                 </div>
             </div>
         </div>
@@ -75,6 +75,43 @@ export default {
                     this.$swal('Gagal menyimpan pengaturan','silahkan cek kembali form pengaturan yang anda isi','error');
                 }
             })
+        },
+        deleteAll() {
+            this.$swal({
+                title: "Peringatan",
+                text: `Anda akan menghapus semua data pendaftar`,
+                icon: "warning",
+                showCloseButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Lanjut",
+                confirmButtonColor: '#fbbf24',
+                cancelButtonText: "Tidak",
+            }).then((result) => {
+                if (result.isConfirmed) { 
+                    this.$swal({
+                        title: "Anda yakin?",
+                        text: `Apakah anda yakin akan menghapus semua data pendaftar?`,
+                        icon: "question",
+                        showCloseButton: true,
+                        showCancelButton: true,
+                        confirmButtonText: "Ya, hapus",
+                        confirmButtonColor: '#ef4444',
+                        cancelButtonText: "Tidak",
+                    }).then((result) => {
+                        if (result.isConfirmed) { 
+                            this.$inertia.delete(route('ppdb-admin.destroy-all'), {
+                                onSuccess: (page) => {
+                                    this.$swal('Berhasil Terhapus', page.props.flash.message, 'success');
+                                },
+                                onError: (message) => {
+                                    this.$swal('Gagal Menghapus', message, 'error')
+
+                                }
+                            });
+                        }
+                    });
+                }
+            });
         }
     }
 

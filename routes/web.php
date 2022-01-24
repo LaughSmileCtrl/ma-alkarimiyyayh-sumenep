@@ -119,6 +119,15 @@ Route::resource('mail-out', MailOutController::class)
 Route::resource('certificates', CertificateController::class)
     ->except(['create', 'edit']);
 
+Route::get('ppdb-admin/{id}/pdf', [PpdbController::class, 'toPdf'])
+    ->name('ppdb-admin.topdf');
+
+Route::delete('ppdb-admin/destroy-all', [PpdbController::class, 'deleteAll'])
+    ->name('ppdb-admin.destroy-all');
+
+Route::get('ppdb-admin/export-all', [PpdbController::class, 'exportAll'])
+    ->name('ppdb-admin.export-all');
+    
 Route::resource('ppdb-admin', PpdbController::class);
 
 Route::resource('ppdb-setting', PpdbSettingController::class)
