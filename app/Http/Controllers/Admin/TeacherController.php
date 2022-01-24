@@ -56,7 +56,7 @@ class TeacherController extends Controller
 
             $filename = str_replace('images/teacher/', '', $path);
 
-            if ($teacher->file != 'default.png') {
+            if ($teacher->photo != 'default.png') {
                 Storage::delete('images/teacher/'.$teacher->photo);
             }
 
@@ -76,7 +76,7 @@ class TeacherController extends Controller
     {
         $name = $teacher->name;
 
-        if ($teacher->file != 'default.png') {
+        if ($teacher->photo != 'default.png') {
             Storage::delete('images/teacher/'.$teacher->photo);
         }
 

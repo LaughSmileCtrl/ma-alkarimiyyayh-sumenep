@@ -6,18 +6,83 @@
             Data Peserta Didik Baru
         </template>
         <div class="flex justify-between">
-            <Link :href="route('ppdb.index')" class="btn"><i class="fas fa-angle-left"></i> &nbsp; Kembali</Link>
+            <Link :href="route('ppdb-admin.index')" class="btn"><i class="fas fa-angle-left"></i> &nbsp; Kembali</Link>
             <button class="btn btn-secondary"><i class="fas fa-print"></i> &nbsp; Cetak PDF</button>
         </div>
-        <div class="mx-auto my-14 2xl:px-10">
-            <div v-for="i in 3"  :key="i" class="flex flex-col gap-3 my-2 mt-10">
-                <h2 class="text-xl font-bold">Data Pribadi</h2>
-                <div v-for="j in 6"  :key="j" class="grid grid-cols-2 items-center">
-                        <span class="w-full text-lg">Nama Lable yang panjang </span>
-                        <span class="w-full text-lg">Nama Lable yang panjang </span>
+        <div class=" w-full max-w-xl">
+            <div class="mx-auto mb-14 2xl:px-10">
+                <div class="my-8 mx-2 lg:mx-4">
+                    <h2 class="text-xl font-bold">Data Pribadi</h2>
+                    <div class="grid grid-cols-3 gap-y-2 items-center">
+                        <span class="w-full text-md capitalize">Nama lengkap</span>
+                        <span class="w-full text-md col-span-2"> {{ registrar.name }} </span>
+                        <span class="w-full text-md capitalize">NISN</span>
+                        <span class="w-full text-md col-span-2"> {{ registrar.nisn }} </span>
+                        <span class="w-full text-md capitalize">NIK</span>
+                        <span class="w-full text-md col-span-2"> {{ registrar.nik }} </span>
+                        <span class="w-full text-md capitalize">No. Kartu Keluarga</span>
+                        <span class="w-full text-md col-span-2"> {{ registrar.no_kk }} </span>
+                        <span class="w-full text-md capitalize">Tempat lahir</span>
+                        <span class="w-full text-md col-span-2"> {{ registrar.place_of_birth }} </span>
+                        <span class="w-full text-md capitalize">Tanggal lahir</span>
+                        <span class="w-full text-md col-span-2"> {{ registrar.date_of_birth }} </span>
+                        <span class="w-full text-md capitalize">Jenis kelamin</span>
+                        <span class="w-full text-md  col-span-2"> {{ registrar.gender }} </span>
+                        <span class="w-full text-md capitalize">Anak ke-</span>
+                        <span class="w-full text-md col-span-2"> {{ registrar.child_order }} </span>
+                        <span class="w-full text-md capitalize">Jumlah saudara</span>
+                        <span class="w-full text-md col-span-2"> {{ registrar.total_brother }} </span>
+                        <span class="w-full text-md capitalize">No. HP/WA</span>
+                        <span class="w-full text-md col-span-2"> {{ registrar.phone }} </span>
+                        <span class="w-full text-md capitalize">Alamat lengkap</span>
+                        <span class="w-full text-md  col-span-2"> {{ registrar.address }} </span>
+                    </div>
+                </div>
+                <div class="m-8">
+                    <h2 class="text-xl font-bold">Data Ayah</h2>
+                    <div class="grid grid-cols-3 gap-y-2 items-center">
+                        <span class="w-full text-md capitalize">Nama lengkap</span>
+                        <span class="w-full text-md col-span-2"> {{ registrar.father_name }} </span>
+                        <span class="w-full text-md capitalize">NIK</span>
+                        <span class="w-full text-md col-span-2"> {{ registrar.father_nik }} </span>
+                        <span class="w-full text-md capitalize">Tempat lahir</span>
+                        <span class="w-full text-md col-span-2"> {{ registrar.father_place_of_birth }} </span>
+                        <span class="w-full text-md capitalize">Tanggal lahir</span>
+                        <span class="w-full text-md col-span-2"> {{ registrar.father_date_of_birth }} </span>
+                        <span class="w-full text-md capitalize">Pendidikan Terakhir</span>
+                        <span class="w-full text-md col-span-2"> {{ registrar.father_last_education }} </span>
+                        <span class="w-full text-md capitalize">Pekerjaan</span>
+                        <span class="w-full text-md col-span-2"> {{ registrar.father_profession }} </span>
+                        <span class="w-full text-md capitalize">No. HP/WA</span>
+                        <span class="w-full text-md col-span-2"> {{ registrar.father_phone }} </span>
+                        <span class="w-full text-md capitalize">Alamat lengkap</span>
+                        <span class="w-full text-md"> {{ registrar.father_address }} </span>
+                    </div>
+                </div>
+                <div class="m-8">
+                    <h2 class="text-xl font-bold">Data Ibu</h2>
+                    <div class="grid grid-cols-3 gap-y-2 items-center">
+                        <span class="w-full text-md capitalize">Nama lengkap</span>
+                        <span class="w-full text-md col-span-2"> registrar.mother_name }} </span>
+                        <span class="w-full text-md capitalize">NIK</span>
+                        <span class="w-full text-md col-span-2"> registrar.mother_nik }} </span>
+                        <span class="w-full text-md capitalize">Tempat lahir</span>
+                        <span class="w-full text-md col-span-2"> registrar.mother_place_of_birth }} </span>
+                        <span class="w-full text-md capitalize">Tanggal lahir</span>
+                        <span class="w-full text-md col-span-2"> registrar.mother_date_of_birth }} </span>
+                        <span class="w-full text-md capitalize">Pendidikan Terakhir</span>
+                        <span class="w-full text-md col-span-2"> registrar.mother_last_education }} </span>
+                        <span class="w-full text-md capitalize">Pekerjaan</span>
+                        <span class="w-full text-md col-span-2"> registrar.mother_profession }} </span>
+                        <span class="w-full text-md capitalize">No. HP/WA</span>
+                        <span class="w-full text-md col-span-2"> registrar.mother_phone }} </span>
+                        <span class="w-full text-md capitalize">Alamat lengkap</span>
+                        <span class="w-full text-md"> registrar.mother_address }} </span>
+                    </div>
                 </div>
             </div>
         </div>
+        
     </AuthenticatedLayout>
 </template>
 <script>
@@ -30,5 +95,8 @@ export default {
         Head,
         Link,
     },
+    props: {
+        registrar: Object,
+    }
 }
 </script>

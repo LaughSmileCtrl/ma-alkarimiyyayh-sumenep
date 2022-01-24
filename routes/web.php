@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\GraduateController;
 use App\Http\Controllers\Admin\MailInController;
 use App\Http\Controllers\Admin\MailOutController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\PpdbController;
+use App\Http\Controllers\Admin\PpdbSettingController;
 use App\Http\Controllers\Admin\StudentCreationController;
 use App\Http\Controllers\Admin\TeacherController;
 use Illuminate\Foundation\Application;
@@ -89,23 +91,6 @@ Route::get('/document', function () {
  * 
  */
 
-Route::get('/ppdb/index', function () {
-    return Inertia::render('Admin/PPDB/Index');
-})->name('ppdb.index');
-
-Route::get('/ppdb/show', function () {
-    return Inertia::render('Admin/PPDB/Detail');
-})->name('ppdb.show');
-
-Route::get('/ppdb/edit', function () {
-    return Inertia::render('Admin/PPDB/Form');
-})->name('ppdb.edit');
-
-Route::get('/ppdb/settings', function () {
-    return Inertia::render('Admin/PPDB/Settings');
-})->name('ppdb.settings');
-
-
 Route::resource('dashboard', DashboardController::class)
     ->only(['index', 'store']);
 
@@ -133,6 +118,11 @@ Route::resource('mail-out', MailOutController::class)
 
 Route::resource('certificates', CertificateController::class)
     ->except(['create', 'edit']);
+
+Route::resource('ppdb-admin', PpdbController::class);
+
+Route::resource('ppdb-setting', PpdbSettingController::class)
+    ->only(['index', 'store']);
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Profile/Dashboard');

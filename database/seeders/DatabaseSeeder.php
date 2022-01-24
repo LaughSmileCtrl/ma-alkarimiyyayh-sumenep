@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
             PhotoSeeder::class,
             TeacherSeeder::class,
             GeneralSeeder::class,
+            PpdbSettingSeeder::class,
+            PpdbSeeder::class,
         ]);
     }
 }

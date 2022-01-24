@@ -12,28 +12,28 @@
                     <label class="label">
                         <span class="label-text">Tanggal Buka</span>
                     </label> 
-                    <input type="datetime-local" class="input input-primary input-bordered">
+                    <input v-model="form.open" type="datetime-local" class="input input-primary input-bordered">
                 </div>
                 <div class="form-control">
                     <label class="label">
                         <span class="label-text">Tanggal Tutup</span>
                     </label> 
-                    <input type="datetime-local" class="input input-primary input-bordered">
+                    <input v-model="form.close" type="datetime-local" class="input input-primary input-bordered">
                 </div>
                 <div class="form-control">
                     <label class="label">
                         <span class="label-text">Tanggal Pengumuman</span>
                     </label> 
-                    <input type="datetime-local" class="input input-primary input-bordered">
+                    <input v-model="form.announcement" type="datetime-local" class="input input-primary input-bordered">
                 </div>
                 <div class="form-control">
                     <label class="label">
                         <span class="label-text">URL pengumuman</span>
                     </label> 
-                    <input type="text" class="input input-primary input-bordered">
+                    <input v-model="form.announcement_url" type="text" class="input input-primary input-bordered">
                 </div>
                 <div class="ml-auto mr-0 mt-3 w-fit">
-                    <button class="btn btn-primary">Simpan</button>
+                    <button @click="saveSetting" class="btn btn-primary">Simpan</button>
                 </div>
             </div>
             <div class="border shadow-inner shadow-gray-700/60 rounded-3xl w-full h-fit p-7">
@@ -56,7 +56,27 @@ export default {
     components: {
         AuthenticatedLayout,
         Head,
-    
     },
+    data() {
+        return {
+            form: this.$inertia.form(this.setting),
+        }
+    },
+    props: {
+        setting: Object,
+    },
+    methods: {
+        saveSetting() {
+            this.form.post(route('ppdb-setting.index'), {
+                onSuccess: (page) => {
+                    this.$swal('Berhasil Menyimpan', page.props.flash.message, 'success');
+                },
+                onError: (message) => {
+                    this.$swal('Gagal menyimpan pengaturan','silahkan cek kembali form pengaturan yang anda isi','error');
+                }
+            })
+        }
+    }
+
 }
 </script>

@@ -62,8 +62,8 @@
                             <li>
                                 <ul class="border-y border-white">
                                     <li class="p-3 font-medium">PPDB</li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('ppdb.index'))"><Link :href="route('ppdb.index')" class="h-full w-full"> <i class="fas fa-users w-5"></i> &nbsp; Data Masuk</Link></li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('ppdb.settings'))"><Link :href="route('ppdb.settings')" class="h-full w-full"> <i class="fas fa-cog w-5"></i> &nbsp; Pengaturan</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('ppdb-admin.index'))"><Link :href="route('ppdb-admin.index')" class="h-full w-full"> <i class="fas fa-users w-5"></i> &nbsp; Data Masuk</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('ppdb-setting.index'))"><Link :href="route('ppdb-setting.index')" class="h-full w-full"> <i class="fas fa-cog w-5"></i> &nbsp; Pengaturan</Link></li>
                                 </ul>
                             </li>
                         </ul>
