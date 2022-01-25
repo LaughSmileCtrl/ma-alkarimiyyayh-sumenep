@@ -11,13 +11,11 @@
                 <h2 class="text-xl mb-5 font-semibold">Umum</h2>
                 <div class="grid grid-cols-2 gap-3 content-center">
                     <label for="" class="text-lg mr-3">Jumlah Guru </label>
-                    <input v-model="form.total_graduate" type="text" class="input input-primary bg-gray-100 focus:bg-white w-full" />
-                    <label for="" class="text-lg mr-3">Jumlah Siswa </label>
                     <input v-model="form.total_teacher" type="text" class="input input-primary bg-gray-100 focus:bg-white w-full" />
-                    <label for="" class="text-lg mr-3">Jumlah Alumni </label>
+                    <label for="" class="text-lg mr-3">Jumlah Siswa </label>
                     <input v-model="form.total_student" type="text" class="input input-primary bg-gray-100 focus:bg-white w-full" />
-                    <label for="" class="text-lg mr-3 mt-7">Nomor Whatsapp</label>
-                    <input v-model="form.whatsapp" type="text" class="input input-primary bg-gray-100 focus:bg-white w-full mt-7" />
+                    <label for="" class="text-lg mr-3">Jumlah Alumni </label>
+                    <input v-model="form.total_graduate" type="text" class="input input-primary bg-gray-100 focus:bg-white w-full" />
                     <button @click="saveGeneral" class="btn btn-primary w-fit col-span-2 ml-auto mr-0 mt-5">Simpan</button>
                     
                 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\NewsController as GuestNewsController;
 use App\Http\Requests\Admin\StoreArticleRequest;
 use App\Models\Article;
 use App\Models\ArticleCategory;
@@ -27,7 +28,7 @@ class NewsController extends Controller
 
         return Inertia::render('Admin/Article/Index', [
             'title' => 'Berita',
-            'create' => route('news.create'),
+            'create' => route('news-admin.create'),
             'articles' => $news,
         ]);
     }
@@ -38,8 +39,8 @@ class NewsController extends Controller
         return Inertia::render('Admin/Article/Form', [
             'title' => 'Tambah Berita',
             'links' => [
-                'back' => route('news.index'),
-                'save' => route('news.store'),
+                'back' => route('news-admin.index'),
+                'save' => route('news-admin.store'),
             ]
         ]);
     }
@@ -71,11 +72,8 @@ class NewsController extends Controller
 
     public function show($id)
     {
-        $article = Article::findOrFail($id);
+        return redirect()->action([GuestNewsController::class, 'show'], ['news'=> $id]);
 
-        return Inertia::render('Profile/Article', [
-            'article' => $article,
-        ]);
     }
 
 
@@ -88,8 +86,8 @@ class NewsController extends Controller
             'title' => 'Ubah Berita',
             'article' => $article,
             'links' => [
-                'back' => route('news.index'),
-                'save' => route('news.update', $id),
+                'back' => route('news-admin.index'),
+                'save' => route('news-admin.update', $id),
             ]
         ]);
     }

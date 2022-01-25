@@ -17,16 +17,16 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call([
             ArticleCategorySeeder::class,
-            ArticleSeeder::class,
+            // ArticleSeeder::class,
             FileCategorySeeder::class,
-            FileSeeder::class,
-            GraduateSeeder::class,
+            // FileSeeder::class,
+            // GraduateSeeder::class,
             PhotoCategorySeeder::class,
-            PhotoSeeder::class,
-            TeacherSeeder::class,
-            GeneralSeeder::class,
+            // PhotoSeeder::class,
+            // TeacherSeeder::class,
+            // GeneralSeeder::class,
             PpdbSettingSeeder::class,
-            PpdbSeeder::class,
+            // PpdbSeeder::class,
         ]);
     }
 }

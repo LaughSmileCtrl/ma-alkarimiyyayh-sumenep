@@ -30,7 +30,7 @@ class TeacherController extends Controller
     {
         $path = $request->photo->store('images/teacher/');
 
-        $filename = str_replace('images/teacher/', '', $path);
+        $filename = str_replace('images/teacher//', '', $path);
 
         Teacher::create([
             'name' => $request->name,
@@ -54,7 +54,7 @@ class TeacherController extends Controller
         if ($photo) {
             $path = $photo->store('images/teacher/');
 
-            $filename = str_replace('images/teacher/', '', $path);
+            $filename = str_replace('images/teacher//', '', $path);
 
             if ($teacher->photo != 'default.png') {
                 Storage::delete('images/teacher/'.$teacher->photo);

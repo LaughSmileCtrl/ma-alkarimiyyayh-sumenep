@@ -55,8 +55,8 @@
                             <li>
                                 <ul class="border-y border-white">
                                     <li class="p-3 font-medium">Artikel</li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('news.index'))"><Link :href="route('news.index')" class="h-full w-full"> <i class="fas fa-newspaper w-5"></i> &nbsp; Berita</Link></li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('student-creations.index'))"><Link :href="route('student-creations.index')" class="h-full w-full"> <i class="fas fa-file-alt w-5"></i> &nbsp; Karya Siswa</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('news-admin.index'))"><Link :href="route('news-admin.index')" class="h-full w-full"> <i class="fas fa-newspaper w-5"></i> &nbsp; Berita</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('student-creations-admin.index'))"><Link :href="route('student-creations-admin.index')" class="h-full w-full"> <i class="fas fa-file-alt w-5"></i> &nbsp; Karya Siswa</Link></li>
                                 </ul>
                             </li>
                             <li>

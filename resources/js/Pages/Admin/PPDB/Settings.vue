@@ -32,6 +32,12 @@
                     </label> 
                     <input v-model="form.announcement_url" type="text" class="input input-primary input-bordered">
                 </div>
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">Brosur</span>
+                    </label> 
+                    <input @input="form.image = $event.target.files[0]" type="file" accept="image/*" class="">
+                </div>
                 <div class="ml-auto mr-0 mt-3 w-fit">
                     <button @click="saveSetting" class="btn btn-primary">Simpan</button>
                 </div>

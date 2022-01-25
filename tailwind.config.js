@@ -37,7 +37,7 @@ module.exports = {
                 600: '#2abb67',
                 700: '#219150',
                 800: '#186839',
-                900: '#13532e',
+                900: '#1E392A',
             },
             transparent: 'transparent',
             current: 'currentColor',

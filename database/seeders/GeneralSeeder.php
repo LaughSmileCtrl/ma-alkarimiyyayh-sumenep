@@ -19,7 +19,6 @@ class GeneralSeeder extends Seeder
                 'total_graduate' => 0,
                 'total_teacher' => 0,
                 'total_student' => 0,
-                'whatsapp' => '62000000000',
             ]);
     }
 }

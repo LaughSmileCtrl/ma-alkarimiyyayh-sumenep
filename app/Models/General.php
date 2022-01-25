@@ -13,13 +13,11 @@ class General extends Model
         'total_graduate',
         'total_teacher',
         'total_student',
-        'whatsapp',
     ];
 
     protected $attributes = [
         'total_graduate' => 0,
         'total_teacher' => 0,
         'total_student' => 0,
-        'whatsapp' => '6200000',
     ];
 }

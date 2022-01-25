@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\PpdbSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class PpdbSettingController extends Controller
@@ -24,14 +25,21 @@ class PpdbSettingController extends Controller
 
     public function store(Request $request)
     {
-        PpdbSetting::first()
-            ->update(
-                $request->only([
-                    'open',
-                    'close',
-                    'announcement',
-                    'announcement_url'
-                ]));
+        $settingRequest = $request->all();
+
+        $ppdbSetting = PpdbSetting::first();
+
+        $image = $request->image;
+
+        if ($image && !(is_string($image))) {
+            $path = $image->store('images');
+
+            Storage::delete('images/'.$ppdbSetting->image);
+
+            $settingRequest['image'] = str_replace('images/', '', $path);
+        }
+
+        $ppdbSetting->update($settingRequest);
 
         return back()->with([
             'message' => 'pengaturan berhasil disimpan',

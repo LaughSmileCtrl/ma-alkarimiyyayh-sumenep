@@ -33,7 +33,7 @@
                                             <Link :href="route('structural')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Struktur&nbsp;Organisasi</Link>
                                         </MenuItem>
                                         <MenuItem class="py-1">
-                                            <Link :href="route('teachers')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Data&nbsp;Guru</Link>
+                                            <Link :href="route('teacher.index')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Data&nbsp;Guru</Link>
                                         </MenuItem>
                                         <MenuItem class="py-1">
                                             <Link :href="route('contact')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Kontak&nbsp;Kami</Link>
@@ -52,37 +52,37 @@
                                             <Link :href="route('extracurricular')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Ekstrakurikuler</Link>
                                         </MenuItem>
                                         <MenuItem class="py-1">
-                                            <Link :href="route('achivement')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Data&nbsp;Prestasi</Link>
+                                            <Link :href="route('achivement.index')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Data&nbsp;Prestasi</Link>
                                         </MenuItem>
                                         <MenuItem class="py-1">
-                                            <Link :href="route('graduate')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Data&nbsp;Alumni</Link>
+                                            <Link :href="route('graduate.index')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Data&nbsp;Alumni</Link>
                                         </MenuItem>
                                     </template>
                                 </NavSubmenu>
                                 <NavSubmenu>
                                     <template #menu>
-                                        <p class="">Tulisan&nbsp;&#9662;</p>
+                                        <p class="">Artikel&nbsp;&#9662;</p>
                                     </template>
                                     <template #submenu>
                                         <MenuItem class="py-1">
-                                            <Link :href="route('news')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Berita</Link>
+                                            <Link :href="route('news.index')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Berita</Link>
                                         </MenuItem>
                                         <MenuItem class="py-1">
-                                            <Link :href="route('student-creation')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Karya&nbsp;Siswa</Link>
+                                            <Link :href="route('student-creations.index')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Karya&nbsp;Siswa</Link>
                                         </MenuItem>
                                     </template>
                                 </NavSubmenu>
-                                <Link :href="route('ppdb')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">PPDB</Link>
+                                <Link :href="route('ppdb.index')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">PPDB</Link>
                                 <NavSubmenu>
                                     <template #menu>
                                         <p class="">Arsip&nbsp;&#9662;</p>
                                     </template>
                                     <template #submenu>
                                         <MenuItem class="py-1">
-                                            <Link :href="route('gallery')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Album</Link>
+                                            <Link :href="route('photo.index')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Album</Link>
                                         </MenuItem>
                                         <MenuItem class="py-1">
-                                            <Link :href="route('document')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Dokumen</Link>
+                                            <Link :href="route('document.index')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Dokumen</Link>
                                         </MenuItem>
                                     </template>
                                 </NavSubmenu>
@@ -111,7 +111,7 @@
                                                 <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('history'))"><Link :href="route('history')">Sejarah</Link></MenuItem>
                                                 <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('visionmission'))"><Link :href="route('visionmission')">Visi Misi</Link></MenuItem>
                                                 <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('structural'))"><Link :href="route('structural')">Struktur&nbsp;Organisasi</Link></MenuItem>
-                                                <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('teachers'))"><Link :href="route('teachers')">Data Guru</Link></MenuItem>
+                                                <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('teacher.index'))"><Link :href="route('teacher.index')">Data Guru</Link></MenuItem>
                                                 <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('contact'))"><Link :href="route('contact')">Kontak Kami</Link></MenuItem>
                                             </template>
                                         </SideSubmenu>
@@ -124,8 +124,8 @@
                                             <template #submenu>
                                                 <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('department'))"><Link :href="route('department')">Jurusan</Link></MenuItem>
                                                 <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('extracurricular'))"><Link :href="route('extracurricular')">Ekstrakurikuler</Link></MenuItem>
-                                                <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('achivement'))"><Link :href="route('achivement')">Data Prestasi</Link></MenuItem>
-                                                <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('graduate'))"><Link :href="route('graduate')">Data Alumni</Link></MenuItem>
+                                                <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('achivement.index'))"><Link :href="route('achivement.index')">Data Prestasi</Link></MenuItem>
+                                                <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('graduate.index'))"><Link :href="route('graduate.index')">Data Alumni</Link></MenuItem>
                                             </template>
                                         </SideSubmenu>
                                     </li>
@@ -135,20 +135,20 @@
                                                 Artikel &#9662;
                                             </template>
                                             <template #submenu>
-                                                <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('news'))"><Link :href="route('news')">Berita</Link></MenuItem>
-                                                <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('student-creation'))"><Link :href="route('student-creation')">Karya Siswa</Link></MenuItem>
+                                                <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('news.index'))"><Link :href="route('news.index')">Berita</Link></MenuItem>
+                                                <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('student-creations.index'))"><Link :href="route('student-creations.index')">Karya Siswa</Link></MenuItem>
                                             </template>
                                         </SideSubmenu>
                                     </li>
-                                    <li :class="'px-4 py-2 w-full block ' + activeClass(route().current('ppdb'))"><Link :href="route('ppdb')">PPDB</Link></li>
+                                    <li :class="'px-4 py-2 w-full block ' + activeClass(route().current('ppdb.index'))"><Link :href="route('ppdb.index')">PPDB</Link></li>
                                     <li class="">
                                         <SideSubmenu>
                                             <template #menu>
                                                 Arsip &#9662;
                                             </template>
                                             <template #submenu>
-                                                <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('gallery'))"><Link :href="route('gallery')">Album</Link></MenuItem>
-                                                <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('document'))"><Link :href="route('document')">Dokumen</Link></MenuItem>
+                                                <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('photo.index'))"><Link :href="route('photo.index')">Album</Link></MenuItem>
+                                                <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('document.index'))"><Link :href="route('document.index')">Dokumen</Link></MenuItem>
                                             </template>
                                         </SideSubmenu>
                                     </li>

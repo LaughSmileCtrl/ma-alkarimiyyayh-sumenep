@@ -50,7 +50,7 @@ class AchivementController extends Controller
     {
         $path = $request->file->store('images/photo/');
 
-        $filename = str_replace('images/photo/', '', $path);
+        $filename = str_replace('images/photo//', '', $path);
 
         $typeId = PhotoCategory::select('id')
             ->where('title', 'achivement')
@@ -81,7 +81,7 @@ class AchivementController extends Controller
         if ($request->file) {
             $path = $request->file->store('images/photo/');
 
-            $filename = str_replace('images/photo//', '', $path);
+            $filename = str_replace('images/photo///', '', $path);
 
             if ($photo->file != 'default.png') {
                 Storage::delete('images/photo/'.$photo->file);

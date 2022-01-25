@@ -11,10 +11,9 @@
                     />
                     <h2 class="text-md lg:text-xl ">Madrasah Aliyah</h2>
                     <h2 class="text-xl lg:text-2xl ">Al-Karimiyyah Sumenep</h2>
-                    <div class="flex flex-row gap-4 my-6">
-                        <div class="h-7 w-7 rounded-lg bg-gray-100"></div>
-                        <div class="h-7 w-7 rounded-lg bg-gray-100"></div>
-                        <div class="h-7 w-7 rounded-lg bg-gray-100"></div>
+                    <div class="flex flex-row items-center gap-4 my-6">
+                        <div class=""> <a href="https://www.instagram.com/maalkarimiyyah" target="_blank"><i class="fab fa-instagram fa-lg"></i></a></div>
+                        <div class=""> <a href="https://www.youtube.com/channel/UCSE3RlYWI64n7Yk4NbjCQwA" target="_blank"><i class="fab fa-youtube fa-lg"></i></a></div>
                     </div>
                 </div>
                 <div class="text-center lg:text-left">
@@ -22,26 +21,25 @@
                     <Link :href="route('history')" class="block my-2">Sejarah</Link>
                     <Link :href="route('visionmission')" class="block my-2">Visi Misi</Link>
                     <Link :href="route('structural')" class="block my-2">Struktur&nbsp;Organisasi</Link>
-                    <Link :href="route('ppdb')" class="block my-2">PPDB</Link>
-                    <Link :href="route('news')" class="block my-2">Berita</Link>
-                    <Link :href="route('document')" class="block my-2">Dokumen</Link>
+                    <Link :href="route('ppdb.index')" class="block my-2">PPDB</Link>
+                    <Link :href="route('news.index')" class="block my-2">Berita</Link>
+                    <Link :href="route('document.index')" class="block my-2">Dokumen</Link>
                 </div>
                 <div class="text-left">
                     <h3 class="text-xl text-center mb-2">Kontak kami</h3>
                     <div class="flex flex-row justify-center items-center">
                         <i class="w-6 mr-2 fas fa-map-marker-alt fa-lg"></i>
                         <span class="block w-56 my-2">
-                            Jalan Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit.
+                            Jl. Raya Gapura, Desa Beraji Kec. Gapura Kab. Sumenep Prov. Jawa Timur 69472
                         </span>
                     </div>
                     <div class="flex flex-row justify-center items-center">
                         <i class="w-6 mr-2 fas fa-phone fa-lg"></i>
-                        <span class="block w-56 my-2"> +42 000 000 000 </span>
+                        <span class="block w-56 my-2"> +62 8193 9414 248 </span>
                     </div>
                     <div class="flex flex-row justify-center items-center">
                         <i class="w-6 mr-2 fas fa-envelope fa-lg"></i>
-                        <span class="block w-56 my-2"> example@mail.com </span>
+                        <span class="block w-56 my-2"> alkarimiyyahma@gmail.com </span>
                     </div>
                 </div>
             </div>
@@ -55,7 +53,7 @@
     </div>
 
     <div class="z-20 h-10 w-10 bg-green-400 rounded-full fixed bottom-4 right-4 flex justify-center items-center tooltip  tooltip-left" data-tip="hubungi kami melalui Whatsapp">
-        <button class="btn btn-ghost rounded-full"><i class="fab fa-whatsapp fa-lg text-white"></i></button>
+        <a href="https://wa.me/6281939414248" target="_blank" class="btn btn-ghost rounded-full"><i class="fab fa-whatsapp fa-lg text-white"></i></a>
     </div>
 </template>
 

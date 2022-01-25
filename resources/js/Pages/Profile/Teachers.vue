@@ -17,13 +17,13 @@
             >
                 Data Guru
             </h2>
-            <div class="flex flex-wrap gap-5 justify-center">
-                <div v-for="i in 40" :key="i" class="text-center w-28">
+            <div class="flex flex-wrap gap-8 justify-center">
+                <div v-for="(teacher, i) in teachers" :key="i" class="text-center w-28">
                     <div class="w-28 h-32 rounded mb-3 pt-2">
-                        <img src="images/teacher.png" alt="" class="object-cover" />
+                        <img :src="'images/teacher/' + teacher.photo" alt="" class="object-cover w-28 h-32 bg-white rounded" />
                     </div>
-                    <p class="text-sm">Nama Guru</p>
-                    <p class="text-sm text-gray-500">Mata pelajaran</p>
+                    <p class="text-sm">{{ teacher.name }}</p>
+                    <p class="text-sm text-gray-500">{{ teacher.subject }}</p>
                 </div>
                 
             </div>
@@ -41,6 +41,9 @@ export default {
     components: {
         MainNav,
         Footer,
+    },
+    props: {
+        teachers: Object,
     }
 }
 </script>

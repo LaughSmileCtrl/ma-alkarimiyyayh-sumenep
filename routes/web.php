@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AchivementController as GuestAchivementController;
 use App\Http\Controllers\Admin\AchivementController;
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -12,14 +13,20 @@ use App\Http\Controllers\Admin\PpdbController;
 use App\Http\Controllers\Admin\PpdbSettingController;
 use App\Http\Controllers\Admin\StudentCreationController;
 use App\Http\Controllers\Admin\TeacherController;
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\GalleryController as GuestGalleryController;
+use App\Http\Controllers\GraduateController as GuestGraduateController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewsController as GuestNewsController;
+use App\Http\Controllers\PpdbController as GuestPpdbController;
+use App\Http\Controllers\StudentCreationController as GuestStudentCreationController;
+use App\Http\Controllers\TeacherController as GuestTeacherController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-Route::get('/', function () {
-    return Inertia::render('Profile/Home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/history', function () {
     return Inertia::render('Profile/History');
@@ -29,9 +36,8 @@ Route::get('/visionmission', function () {
     return Inertia::render('Profile/VisionMission');
 })->name('visionmission');
 
-Route::get('/teachers', function () {
-    return Inertia::render('Profile/Teachers');
-})->name('teachers');
+Route::resource('teacher', GuestTeacherController::class)
+    ->only('index');
 
 Route::get('/structural', function () {
     return Inertia::render('Profile/Structural');
@@ -53,38 +59,26 @@ Route::get('/extracurricular', function () {
     return Inertia::render('Profile/Extracurricular');
 })->name('extracurricular');
 
-Route::get('/achivement', function () {
-    return Inertia::render('Profile/Achivement');
-})->name('achivement');
+Route::resource('achivement', GuestAchivementController::class)
+    ->only('index');
 
-Route::get('/graduate', function () {
-    return Inertia::render('Profile/Graduate');
-})->name('graduate');
+Route::resource('graduate', GuestGraduateController::class)
+    ->only('index');
 
-Route::get('/our-news', function () {
-    return Inertia::render('Profile/News');
-})->name('news');
+Route::resource('news', GuestNewsController::class)
+    ->only(['index', 'show']);
 
-Route::get('/news-detail', function () {
-    return Inertia::render('Profile/Artikel');
-})->name('news-detail');
+Route::resource('student-creations', GuestStudentCreationController::class)
+    ->only(['index', 'show']);
 
-Route::get('/ppdb', function () {
-    return Inertia::render('Profile/PPDB');
-})->name('ppdb');
+Route::resource('ppdb', GuestPpdbController::class)
+    ->only(['index', 'create', 'store']);
 
-Route::get('/ppdb-form', function () {
-    return Inertia::render('Profile/PPDBForm');
-})->name('ppdb-form');
+Route::resource('photo', GuestGalleryController::class)
+    ->only('index');
 
-Route::get('/gallery', function () {
-    return Inertia::render('Profile/Gallery');
-})->name('gallery');
-
-Route::get('/document', function () {
-    return Inertia::render('Profile/Document');
-})->name('document');
-
+Route::resource('document', DocumentController::class)
+    ->only(['index', 'show']);
 
 /**
  * Admin Section
@@ -97,9 +91,9 @@ Route::resource('dashboard', DashboardController::class)
 Route::resource('teachers', TeacherController::class)
     ->except(['create', 'show', 'edit']);
 
-Route::resource('news', NewsController::class);
+Route::resource('news-admin', NewsController::class);
 
-Route::resource('student-creations', StudentCreationController::class);
+Route::resource('student-creations-admin', StudentCreationController::class);
 
 Route::resource('graduates', GraduateController::class)
     ->except(['create', 'show', 'edit']);
@@ -132,14 +126,6 @@ Route::resource('ppdb-admin', PpdbController::class);
 
 Route::resource('ppdb-setting', PpdbSettingController::class)
     ->only(['index', 'store']);
-
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Profile/Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-
-
-
 
 
 require __DIR__.'/auth.php';

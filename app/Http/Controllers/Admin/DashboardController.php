@@ -21,9 +21,8 @@ class DashboardController extends Controller
 
     public function store(Request $request)
     {
-        $general = General::first();
         
-        $general->update($request->all());
+        General::updateOrInsert(['id' => 1], $request->all());
 
         return back()->with([
             'message' => 'pengaturan berhasil disimpan',

@@ -7,9 +7,9 @@
             Album
         </h2>
        
-        <div class="flex gap-6 flex-wrap items-center justify-center">
+        <div class="flex gap-10 flex-wrap items-center justify-center">
             <div
-                v-for="i in 25"
+                v-for="(photo, i) in photos.data"
                 :key="i"
                 class="
                     w-56
@@ -25,7 +25,7 @@
                 "
             >
                 <img
-                    src="https://events.enderuncolleges.com/wp-content/uploads/2019/03/image1-3-825x510.jpg"
+                    :src="'/images/photo/' + photo.file"
                     alt=""
                     class="object-cover h-full w-full rounded-2xl shadow-xl"
                 />
@@ -47,9 +47,14 @@
                         rounded-xl
                     "
                 >
-                    <h2 class="text-xl">ini nama kegiatan</h2>
+                    <h2 class="text-xl">{{ photo.title }}</h2>
 
                 </div>
+            </div>
+        </div>
+        <div class="my-5 w-full">
+            <div class="mx-auto w-fit">
+                <Pagination :links="photos.links" @changePage="query" />
             </div>
         </div>
     </section>
@@ -61,12 +66,23 @@
 import MainNav from "@/Components/MainNav.vue";
 import Footer from "@/Components/Footer.vue";
 import { Link } from "@inertiajs/inertia-vue3";
+import Pagination from '@/Components/Pagination.vue'
+
 
 export default {
     components: {
         MainNav,
         Footer,
         Link,
+        Pagination,
     },
+    props: {
+        photos: Object,
+    },
+    methods: {
+        query(url) {
+            this.$inertia.get(url, {}, {only: ['photos'], preserveState: true,});
+        },
+    }
 };
 </script>

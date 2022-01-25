@@ -1,5 +1,5 @@
 <template>
-    <section class="bg-gray-900 h-screen max-w-screen">
+    <section class="bg-green-900 h-screen max-w-screen">
         <MainNav class="text-white" />
 
         <HeroCarousel>
@@ -17,13 +17,13 @@
                 />
                 <div class="container relative h-full flex items-center">
                     <div class="text-left text-white">
-                        <h2 class="text-4xl lg:text-8xl mb-2">Terpercaya</h2>
+                        <h2 class="text-4xl mb-5">
+                            Berilmu Amaliyah, Berakhlak Karimiyyah, Bertaqwa
+                            Ilahiyah
+                        </h2>
                         <p class="text-md lg:text-lg">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Nemo quaerat quo perferendis inventore
-                            recusandae nostrum quasi obcaecati voluptatem unde
-                            non aspernatur iure cumque tenetur fugit, officiis
-                            voluptas veniam, quidem earum!
+                            Kami sangat berkomitmen untuk mencetak Peserta Didik
+                            yang cerdas Intelektual, Emosional dan Spiritual.
                         </p>
                     </div>
                 </div>
@@ -34,22 +34,142 @@
                     class="
                         absolute
                         inset-0
-                        object-cover object-center
+                        object-cover object-left
                         w-screen
                         h-screen
-                        opacity-40
+                        opacity-80
                     "
                 />
-                <div class="container relative h-full flex items-center">
-                    <div class="text-center text-white">
-                        <h2 class="text-4xl lg:text-8xl mb-2">Terpercaya</h2>
+                <div
+                    class="
+                        container
+                        relative
+                        w-screen
+                        h-full
+                        flex
+                        items-end
+                        lg:items-center
+                    "
+                >
+                    <div
+                        class="
+                            text-white text-center
+                            lg:text-left
+                            mx-auto
+                            lg:ml-auto lg:-mr-5
+                            w-screen
+                            lg:w-3/5
+                            rounded-xl
+                            p-5
+                            bg-white
+                            backdrop-filter backdrop-blur
+                            bg-opacity-30
+                        "
+                    >
+                        <h2 class="text-3xl lg:text-4xl mb-2 lg:mb-8">
+                            Madrasah Hebat Bermartabat, Madrasahnya Revolusi 4.0
+                        </h2>
                         <p class="text-md lg:text-lg">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Nemo quaerat quo perferendis inventore
-                            recusandae nostrum quasi obcaecati voluptatem unde
-                            non aspernatur iure cumque tenetur fugit, officiis
-                            voluptas veniam, quidem earum!
+                            Yuk lihat kegiatan-kegiatan di Madrasah Aliyah
+                            Al-Karimiyyah
                         </p>
+
+                        <div
+                            class="
+                                w-fit
+                                mx-auto
+                                lg:mx-0
+                                mt-2
+                                lg:mt-5
+                                pt-10
+                                pb-5
+                            "
+                        >
+                            <a
+                                class="
+                                    px-10
+                                    py-3
+                                    uppercase
+                                    border-2
+                                    w-fit
+                                    rounded-full
+                                    text-white
+                                    hover:outline
+                                    outline-offset-2
+                                    hover:outline-1
+                                    outline-gray-300
+                                    font-semibold
+                                    hover:scale-105
+                                    animate-pulse
+                                "
+                                >video profile &nbsp;
+                                <i class="fas fa-angle-double-right"></i
+                            ></a>
+                        </div>
+                    </div>
+                </div>
+            </SwiperSlide>
+            <SwiperSlide>
+                <img
+                    src="images/hero3.jpg"
+                    class="
+                        absolute
+                        inset-0
+                        object-cover object-left
+                        w-screen
+                        h-screen
+                        opacity-70
+                    "
+                />
+                <div class="container relative h-full w-full flex items-end lg:items-center">
+                    <div
+                        class="
+                            text-center text-white
+                            w-full
+                        "
+                    >
+                        <div 
+                            class="
+                                mx-auto
+                                p-6
+                                rounded-xl
+                                bg-white
+                                backdrop-filter backdrop-blur
+                                bg-opacity-20
+                                w-full
+                                lg:w-4/5
+                            "
+                        >
+                            <h2 class="text-4xl mb-5">
+                                Yuk Daftar PPDB di MA Al-Karimiyyah
+                            </h2>
+                            <p class="text-md lg:text-lg">
+                                Klik tombol/tautan dibawah ini
+                            </p>
+                            <div class="w-fit mt-5 mx-auto py-10">
+                                <Link
+                                    :href="route('ppdb.index')"
+                                    class="
+                                        px-10
+                                        py-3
+                                        uppercase
+                                        border-2
+                                        w-fit
+                                        rounded-full
+                                        text-white
+                                        hover:outline
+                                        outline-offset-2
+                                        hover:outline-1
+                                        outline-gray-300
+                                        font-semibold
+                                        hover:scale-105
+                                        animate-pulse
+                                    "
+                                    >Daftar &nbsp;
+                                    <i class="fas fa-angle-double-right"></i
+                                ></Link>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </SwiperSlide>
@@ -57,7 +177,7 @@
     </section>
     <section class="container my-14">
         <div class="flex flex-col md:flex-row gap-16 items-center">
-            <div class="px-5 w-full flex flex-col">
+            <div class="px-5 w-full flex flex-col items-center">
                 <div class="flex flex-row gap-5 mb-5">
                     <h2 class="text-3xl lg:text-5xl self-center">
                         Terakreditasi
@@ -65,25 +185,33 @@
                     <img
                         src="/images/accreditation.png"
                         alt=""
-                        class="w-14 lg:w-24"
+                        class="w-16 lg:w-24"
                     />
                 </div>
                 <p class="">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Est iure eum qui obcaecati eaque dignissimos beatae
-                    reiciendis, et adipisci deserunt. Eveniet voluptatibus
-                    ratione iure cumque saepe iste, doloremque neque culpa.
+                    Madrasah Aliyah Al-Karimiyyah telah terakreditasi dengan
+                    nilai 91 dengan predikat A, hal tersebut tertuang dalam
+                    Sertifikat Akreditasi yang dikeluaran oleh Badan Akreditasi
+                    Nasional Sekolah/Madrasah (BAN-SM) Nomor :
+                    1179/BAN-SM/SK/2021 ditetapkan di Jakarta pada tanggal 16
+                    November 2021. Pencapaian ini merupakan salah satu bukti
+                    bahwa MA Al-Karimiyyah selalu mengembangkan kualitas baik
+                    dari Manajemen Madrasah, Pendidikan Madrasah dan semua hal
+                    yang berkaitan dengan Tata Kelola Madrasah.
                 </p>
             </div>
             <img
-                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.qRx9wRe6M-FOZ8TUDeht-AHaLU%26pid%3DApi&f=1"
+                src="/images/akreditasi.png"
                 alt=""
-                class="w-52 rounded shadow-xl"
+                class="w-96 rounded shadow-xl"
             />
         </div>
     </section>
 
-    <section class="my-16 bg-green-50 py-24 skew-y-6 lg:skew-y-3">
+    <section
+        v-if="news || student_creation"
+        class="my-16 bg-green-50 py-24 skew-y-6 lg:skew-y-3"
+    >
         <div
             class="
                 container
@@ -96,10 +224,10 @@
                 lg:-skew-y-3
             "
         >
-            <div class="-mt-28">
-                <h2 class="text-2xl text-center my-4">Karya Siswa Terbaru</h2>
+            <div v-if="news" class="-mt-28">
+                <h2 class="text-2xl text-center my-4">Berita Terbaru</h2>
                 <Link
-                    :href="route('news-detail')"
+                    :href="route('news.show', news.id)"
                     class="
                         w-56
                         md:w-72
@@ -114,27 +242,40 @@
                     "
                 >
                     <img
-                        src="https://events.enderuncolleges.com/wp-content/uploads/2019/03/image1-3-825x510.jpg"
+                        :src="'/images/article/' + news.image"
                         alt=""
-                        class="object-cover h-full w-full rounded-2xl shadow-xl"
+                        class="
+                            object-cover
+                            w-56
+                            md:w-72
+                            lg:w-80
+                            h-44
+                            md:h-56
+                            lg:h-60
+                            rounded-2xl
+                            shadow-xl
+                            bg-white
+                        "
                     />
                     <div
                         class="
                             flex flex-col
                             justify-end
-                            w-full
+                            w-56
+                            md:w-72
+                            lg:w-80
                             h-44
                             md:h-56
                             lg:h-60
                             p-6
                             text-white
-                            md:text-transparent
+                            lg:text-transparent
                             hover:text-white
                             relative
                             bg-gradient-to-t
                             from-gray-900
                             to-transparent
-                            md:from-transparent
+                            lg:from-transparent
                             hover:from-gray-900 hover:to-transparent
                             -mt-44
                             md:-mt-56
@@ -142,9 +283,22 @@
                             rounded-2xl
                         "
                     >
-                        <h2 class="text-xl">Ini Judul Berita</h2>
-                        <p class="text-xs">Senin, 30 Januari 2020</p>
-                        <p class="text-xs mt-2">Admin</p>
+                        <h2 class="text-xl line-clamp-2">{{ news.title }}</h2>
+                        <p class="text-xs">
+                            {{
+                                new Date(news.created_at).toLocaleString(
+                                    "ID-id",
+                                    {
+                                        timezone: "Asia/Jakarta",
+                                        weekday: "long",
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric",
+                                    }
+                                )
+                            }}
+                        </p>
+                        <p class="text-xs mt-2">{{ news.author }}</p>
                         <p class="text-xs mt-2 text-right">
                             selengkapnya &nbsp;<i
                                 class="fas fa-long-arrow-alt-right"
@@ -154,10 +308,10 @@
                 </Link>
             </div>
 
-            <div class="-mb-16">
+            <div v-if="student_creation" class="-mb-16">
                 <h2 class="text-2xl text-center my-4">Karya Siswa Terbaru</h2>
                 <Link
-                    :href="route('news-detail')"
+                    :href="route('student-creations.show', student_creation.id)"
                     class="
                         w-56
                         md:w-72
@@ -172,27 +326,40 @@
                     "
                 >
                     <img
-                        src="https://events.enderuncolleges.com/wp-content/uploads/2019/03/image1-3-825x510.jpg"
+                        :src="'/images/article/' + student_creation.image"
                         alt=""
-                        class="object-cover h-full w-full rounded-2xl shadow-xl"
+                        class="
+                            object-cover
+                            w-56
+                            md:w-72
+                            lg:w-80
+                            h-44
+                            md:h-56
+                            lg:h-60
+                            rounded-2xl
+                            shadow-xl
+                            bg-white
+                        "
                     />
                     <div
                         class="
                             flex flex-col
                             justify-end
-                            w-full
+                            w-56
+                            md:w-72
+                            lg:w-80
                             h-44
                             md:h-56
                             lg:h-60
                             p-6
                             text-white
-                            md:text-transparent
+                            lg:text-transparent
                             hover:text-white
                             relative
                             bg-gradient-to-t
                             from-gray-900
                             to-transparent
-                            md:from-transparent
+                            lg:from-transparent
                             hover:from-gray-900 hover:to-transparent
                             -mt-44
                             md:-mt-56
@@ -200,9 +367,25 @@
                             rounded-2xl
                         "
                     >
-                        <h2 class="text-xl">Ini Judul Berita</h2>
-                        <p class="text-xs">Senin, 30 Januari 2020</p>
-                        <p class="text-xs mt-2">Admin</p>
+                        <h2 class="text-xl line-clamp-2">
+                            {{ student_creation.title }}
+                        </h2>
+                        <p class="text-xs">
+                            {{
+                                new Date(
+                                    student_creation.created_at
+                                ).toLocaleString("ID-id", {
+                                    timezone: "Asia/Jakarta",
+                                    weekday: "long",
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                })
+                            }}
+                        </p>
+                        <p class="text-xs mt-2">
+                            {{ student_creation.author }}
+                        </p>
                         <p class="text-xs mt-2 text-right">
                             selengkapnya &nbsp;<i
                                 class="fas fa-long-arrow-alt-right"
@@ -226,7 +409,7 @@
             "
         >
             <div
-                class="h-fit w-fit shadow-xl shadow-green-100/60 rounded-lg p-4"
+                class="flex flex-col items-center h-fit w-fit shadow-xl shadow-green-100/60 rounded-lg p-4"
             >
                 <div class="pt-2 rounded-md">
                     <svg
@@ -244,11 +427,13 @@
                         />
                     </svg>
                 </div>
-                <h2 class="text-center text-4xl mt-4">34</h2>
+                <h2 class="text-center text-5xl mt-4 font-bold">
+                    {{ general ? general.total_teacher : "-" }}
+                </h2>
                 <h3 class="text-center text-sm">Jumlah Guru</h3>
             </div>
             <div
-                class="h-fit w-fit shadow-xl shadow-green-100/60 rounded-lg p-4"
+                class="flex flex-col items-center h-fit w-fit shadow-xl shadow-green-100/60 rounded-lg p-4"
             >
                 <div class="pt-2 rounded-md">
                     <svg
@@ -266,11 +451,13 @@
                         />
                     </svg>
                 </div>
-                <h2 class="text-center text-4xl mt-4">340</h2>
+                <h2 class="text-center text-5xl mt-4 font-bold">
+                    {{ general ? general.total_student : "-" }}
+                </h2>
                 <h3 class="text-center text-sm">Jumlah Siswa</h3>
             </div>
             <div
-                class="h-fit w-fit shadow-xl shadow-green-100/60 rounded-lg p-4"
+                class="flex flex-col items-center h-fit w-fit shadow-xl shadow-green-100/60 rounded-lg p-4 "
             >
                 <div class="pt-2 rounded-md">
                     <svg
@@ -292,7 +479,9 @@
                         />
                     </svg>
                 </div>
-                <h2 class="text-center text-4xl mt-4">3400</h2>
+                <h2 class="text-center text-5xl mt-4 font-bold">
+                    {{ general ? general.total_graduate : "-" }}
+                </h2>
                 <h3 class="text-center text-sm">Jumlah Alumni</h3>
             </div>
         </div>
@@ -321,6 +510,11 @@ export default {
         BorderGradient,
         Footer,
         Link,
+    },
+    props: {
+        general: Object,
+        news: Object,
+        student_creation: Object,
     },
 };
 </script>

@@ -18,7 +18,6 @@ class CreateGeneralsTable extends Migration
             $table->string('total_graduate')->nullable();
             $table->string('total_teacher')->nullable();
             $table->string('total_student')->nullable();
-            $table->string('whatsapp')->nullable();
             $table->timestamps();
         });
     }

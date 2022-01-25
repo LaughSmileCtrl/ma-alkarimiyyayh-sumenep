@@ -21,26 +21,31 @@
         >
             <div class="text-center md:text-left">
                 <select
+                    @change="query(graduates.path)" v-model="yearSelected"
                     class="select select-bordered select-primary max-w-xs mb-2"
                 >
-                    <option disabled="disabled" selected="selected">
-                        Pilih Tahun Lulus
-                    </option>
-                    <option>2018</option>
-                    <option>2019</option>
-                    <option>2020</option>
+                    <option value="" disabled="disabled" selected="selected"> Pilih Tahun Lulus </option>
+                    <option v-for="year in years" :key="year">{{ year }}</option>
+
                 </select>
-                <p class="text-xs">
-                    Jumlah alumni pada tahun yang dipilih: 302
+                <div class="w-36 md:w-56">
+                    <div v-if="yearSelected" class="badge text-xs">
+                    {{ yearSelected }} <button @click="removeYearSelected" class="btn-ghost btn-xs"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+
+                <p v-if="yearSelected" class="text-xs">
+                    Jumlah alumni pada tahun {{ yearSelected }} adalah {{ graduates.total }} orang
                 </p>
             </div>
             <div class="">
                 <div class="form-control">
-                    <input
-                        type="text"
-                        placeholder="cari nama"
-                        class="input input-primary input-bordered"
-                    />
+                    <input @keyup="query(graduates.path)" v-model="searchQuery" type="text" class="input input-primary w-36 md:w-56 bg-gray-50 shadow-inner shadow-gray-700/70" placeholder="Cari" />
+                </div>
+                <div class="w-36 md:w-56">
+                    <div v-if="searchQuery" class="badge text-xs">
+                    {{ searchQuery }} <button @click="removeSearchQuery" class="btn-ghost btn-xs"><i class="fas fa-times"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -59,26 +64,54 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="i in 30" :key="i" class="text-gray-700">
-                    <td class="border-b-2 p-4">{{ i }}</td>
-                    <td class="border-b-2 p-4">Jean Marc</td>
-                    <td class="border-b-2 p-4">2019</td>
+                <tr v-for="(graduate, i) in graduates.data" :key="i" class="text-gray-700">
+                    <td class="border-b-2 p-4">{{ graduates.from + i }}</td>
+                    <td class="border-b-2 p-4">{{ graduate.name }}</td>
+                    <td class="border-b-2 p-4">{{ graduate.year }}</td>
                 </tr>
             </tbody>
         </table>
+        <div class="my-5">
+            <Pagination :links="graduates.links" @changePage="query" />
+        </div>
     </section>
 
     <Footer />
 </template>
 
 <script>
-import MainNav from "@/Components/MainNav.vue";
-import Footer from "@/Components/Footer.vue";
+import MainNav from "@/Components/MainNav.vue"
+import Footer from "@/Components/Footer.vue"
+import Pagination from '@/Components/Pagination.vue'
 
 export default {
     components: {
         MainNav,
         Footer,
+        Pagination,
+    },
+    props: {
+        graduates: Object,
+        years: Object,
+    },
+    data() {
+        return {
+            yearSelected: '',
+            searchQuery: '',
+        }
+    },
+    methods: {
+        removeYearSelected() {
+            this.yearSelected = ''
+            this.query(this.graduates.path);
+        },
+        removeSearchQuery() {
+            this.searchQuery = ''
+            this.query(this.graduates.path);
+        },
+        query(url) {
+            this.$inertia.get(url, {search: this.searchQuery, year: this.yearSelected}, {only: ['graduates'], preserveState: true,});
+        },
     },
 };
 </script>

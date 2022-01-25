@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\NewsController;
 use App\Http\Requests\Admin\StoreArticleRequest;
 use App\Models\Article;
 use App\Models\ArticleCategory;
@@ -27,7 +28,7 @@ class StudentCreationController extends Controller
 
         return Inertia::render('Admin/Article/Index', [
             'title' => 'Karya Siswa',
-            'create' => route('student-creations.create'),
+            'create' => route('student-creations-admin.create'),
             'articles' => $studentCreation,
         ]);
     }
@@ -38,8 +39,8 @@ class StudentCreationController extends Controller
         return Inertia::render('Admin/Article/Form', [
             'title' => 'Tambah Karya Siswa',
             'links' => [
-                'back' => route('student-creations.index'),
-                'save' => route('student-creations.store'),
+                'back' => route('student-creations-admin.index'),
+                'save' => route('student-creations-admin.store'),
             ],
             'authorOption' => true,
         ]);
@@ -70,10 +71,7 @@ class StudentCreationController extends Controller
 
     public function show($id)
     {
-        $article = Article::find($id);
-        return Inertia::render('Profile/Article', [
-            'article' => $article,
-        ]);
+        return redirect()->action([NewsController::class, 'show'], ['news' => $id]);
     }
 
 
@@ -86,8 +84,8 @@ class StudentCreationController extends Controller
             'title' => 'Ubah Karya Siswa',
             'article' => $article,
             'links' => [
-                'back' => route('student-creations.index'),
-                'save' => route('student-creations.update', $id),
+                'back' => route('student-creations-admin.index'),
+                'save' => route('student-creations-admin.update', $id),
             ],
             'authorOption' => true,
         ]);

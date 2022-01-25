@@ -19,6 +19,7 @@ class CreatePpdbSettingsTable extends Migration
             $table->dateTimeTz('close')->nullable();
             $table->dateTimeTz('announcement')->nullable();
             $table->string('announcement_url')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

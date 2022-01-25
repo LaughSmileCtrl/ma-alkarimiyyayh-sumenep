@@ -231,7 +231,7 @@ export default {
             return `
                 <div class="form-control mx-1 mb-1">
                     <label class="label">
-                        <span class="label-text md:text-lg">Nama File</span>
+                        <span class="label-text md:text-lg">Nama</span>
                     </label> 
                     <input id="name" value="${name}" type="text" placeholder="nama" class="input input-primary input-bordered w-full">
                 </div>

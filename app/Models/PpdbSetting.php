@@ -14,5 +14,6 @@ class PpdbSetting extends Model
         'close',
         'announcement',
         'announcement_url',
+        'image',
     ];
 }

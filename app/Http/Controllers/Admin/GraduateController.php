@@ -62,8 +62,6 @@ class GraduateController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator);
         }
-        
-        $row = fgetcsv($fileHandle);
 
         $n = 0;
 

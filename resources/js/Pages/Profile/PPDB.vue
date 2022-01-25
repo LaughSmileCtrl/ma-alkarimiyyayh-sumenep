@@ -16,11 +16,11 @@
                     my-6
                 "
             >
-                PPDB
+                Pendaftaran Peserta Didik Baru
             </h2>
             <div class="container px-5 py-8 mx-auto flex flex-wrap">
                 <div class="flex flex-wrap w-full">
-                    <div class="lg:w-2/5 md:w-1/2 md:pr-10 md:py-6">
+                    <div class="md:w-1/2 lg:w-3/5 md:pr-10 md:py-6">
                         <div class="flex relative pb-12">
                             <div
                                 class="
@@ -76,7 +76,17 @@
                                     Pendaftaran Dibuka
                                 </h2>
                                 <p class="leading-relaxed font-semibold">
-                                    11 Januari 2022
+                                    {{
+                                        new Date(
+                                            setting.open
+                                        ).toLocaleString("ID-id", {
+                                            timezone: "Asia/Jakarta",
+                                            weekday: "long",
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        })
+                                    }}
                                 </p>
                             </div>
                         </div>
@@ -136,7 +146,28 @@
                                     Tanggal pendaftaran
                                 </h2>
                                 <p class="leading-relaxed font-bold text-lg">
-                                    11 Januari 2022 - 11 Februari 2022
+                                   {{
+                                        new Date(
+                                            setting.open
+                                        ).toLocaleString("ID-id", {
+                                            timezone: "Asia/Jakarta",
+                                            weekday: "long",
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        })
+                                    }} - 
+                                    {{
+                                        new Date(
+                                            setting.close
+                                        ).toLocaleString("ID-id", {
+                                            timezone: "Asia/Jakarta",
+                                            weekday: "long",
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        })
+                                    }}
                                 </p>
                             </div>
                         </div>
@@ -195,7 +226,17 @@
                                     Pendaftaran Ditutup
                                 </h2>
                                 <p class="leading-relaxed font-semibold">
-                                    11 Februari 2022
+                                    {{
+                                        new Date(
+                                            setting.close
+                                        ).toLocaleString("ID-id", {
+                                            timezone: "Asia/Jakarta",
+                                            weekday: "long",
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        })
+                                    }}
                                 </p>
                             </div>
                         </div>
@@ -234,18 +275,28 @@
                                     Pengumuman
                                 </h2>
                                 <p class="leading-relaxed font-semibold">
-                                    17 Februari 2022
+                                    {{
+                                        new Date(
+                                            setting.announcement
+                                        ).toLocaleString("ID-id", {
+                                            timezone: "Asia/Jakarta",
+                                            weekday: "long",
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        })
+                                    }}
                                 </p>
                             </div>
                         </div>
                     </div>
                     <img
-                        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.qRx9wRe6M-FOZ8TUDeht-AHaLU%26pid%3DApi&f=1"
+                        :src="'images/' + setting.image"
                         alt=""
                         class="
                             mx-auto
                             w-4/5
-                            lg:w-3/5
+                            lg:w-2/5
                             md:w-1/2
                             object-contain object-center
                             rounded-lg
@@ -257,7 +308,7 @@
             </div>
         </div>
 
-        <div class="my-24">
+        <div v-if="new Date(setting.close) >= new Date(current_date)" class="my-24">
             <h2
                 class="
                     text-3xl
@@ -270,13 +321,13 @@
                 Bergabunglah bersama kami
             </h2>
             <div class="container px-5 py-8 mx-auto flex flex-wrap">
-                <Link :href="route('ppdb-form')" class="btn btn-lg btn-primary mx-auto">
+                <Link :href="route('ppdb.create')" class="btn btn-lg btn-primary mx-auto">
                     Daftar sekarang
                 </Link>
             </div>
         </div>
 
-        <div class="my-24">
+        <div v-if="setting.announcement_url != null" class="my-24">
             <h2
                 class="
                     text-3xl
@@ -293,9 +344,27 @@
                     Untuk dapat melihat hasil pengumuman dapat dilihat dengan
                     meng-klik tombol unduh berikut ini
                 </p>
-                <Link class="btn btn-primary mx-auto">
+                <a :href="setting.announcement_url" target="_blank" class="btn btn-primary mx-auto">
                     Unduh Pengumuman
-                </Link>
+                </a>
+            </div>
+        </div>
+        <div v-else class="my-24">
+            <h2
+                class="
+                    text-3xl
+                    lg:text-4xl
+                    font-bold
+                    capitalize
+                    text-center
+                "
+            >
+                Pengumuman
+            </h2>
+            <div class="container px-5 py-8 mx-auto flex flex-col">
+                <p class="text-lg text-center my-4">
+                    pengumuman dapat diunduh di laman ini jika telah tersedia
+                </p>
             </div>
         </div>
     </section>
@@ -304,6 +373,7 @@
 </template>
 
 <script>
+
 import MainNav from "@/Components/MainNav.vue";
 import Footer from "@/Components/Footer.vue";
 import { Link } from "@inertiajs/inertia-vue3";
@@ -313,6 +383,10 @@ export default {
         MainNav,
         Footer,
         Link,
+    },
+    props: {
+        setting: Object,
+        current_date: String,
     },
 };
 </script>
