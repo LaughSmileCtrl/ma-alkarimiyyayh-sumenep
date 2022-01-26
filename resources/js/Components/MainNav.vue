@@ -48,9 +48,9 @@
                                         <MenuItem class="py-1">
                                             <Link :href="route('department')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Jurusan</Link>
                                         </MenuItem>
-                                        <MenuItem class="py-1">
+                                        <!-- <MenuItem class="py-1">
                                             <Link :href="route('extracurricular')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Ekstrakurikuler</Link>
-                                        </MenuItem>
+                                        </MenuItem> -->
                                         <MenuItem class="py-1">
                                             <Link :href="route('achivement.index')" class="font-medium text-sm py-1 px-2 hover:bg-green-400 rounded block">Data&nbsp;Prestasi</Link>
                                         </MenuItem>
@@ -123,7 +123,7 @@
                                             </template>
                                             <template #submenu>
                                                 <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('department'))"><Link :href="route('department')">Jurusan</Link></MenuItem>
-                                                <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('extracurricular'))"><Link :href="route('extracurricular')">Ekstrakurikuler</Link></MenuItem>
+                                                <!-- <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('extracurricular'))"><Link :href="route('extracurricular')">Ekstrakurikuler</Link></MenuItem> -->
                                                 <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('achivement.index'))"><Link :href="route('achivement.index')">Data Prestasi</Link></MenuItem>
                                                 <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('graduate.index'))"><Link :href="route('graduate.index')">Data Alumni</Link></MenuItem>
                                             </template>

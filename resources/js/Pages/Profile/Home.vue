@@ -61,6 +61,7 @@
                             lg:w-3/5
                             rounded-xl
                             p-5
+                            lg:p-12
                             bg-white
                             backdrop-filter backdrop-blur
                             bg-opacity-30
@@ -132,6 +133,7 @@
                             class="
                                 mx-auto
                                 p-6
+                                lg:py-12
                                 rounded-xl
                                 bg-white
                                 backdrop-filter backdrop-blur

@@ -10,6 +10,12 @@ use Inertia\Inertia;
 
 class DocumentController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('file-download')->only('show');
+    }
+
     public function index()
     {
         $files = File::where('is_public', 1)

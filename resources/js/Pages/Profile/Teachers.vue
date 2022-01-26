@@ -3,7 +3,7 @@
        <MainNav class="text-gray-900"/>
     </section>
 
-    <section class="container">
+    <section class="container min-h-screen">
         <div class="flex flex-col gap-8 flex-wrap items-center pt-24 pb-16">
             <h2
                 class="

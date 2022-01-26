@@ -42,19 +42,18 @@
                         "
                     ></i>
                     <span class="block w-56 my-2">
-                        Jalan Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit.
+                        Jl. Raya Gapura, Desa Beraji Kec. Gapura Kab. Sumenep Prov. Jawa Timur 69472
                     </span>
                 </div>
                 <div class="flex flex-row justify-center items-center">
                     <i class="w-10 mr-2 fas fa-phone fa-lg text-green-500"></i>
-                    <span class="block w-56 my-2"> +42 000 000 000 </span>
+                    <span class="block w-56 my-2"> +62 8193 9414 248 </span>
                 </div>
                 <div class="flex flex-row justify-center items-center">
                     <i
                         class="w-10 mr-2 fas fa-envelope fa-lg text-green-500"
                     ></i>
-                    <span class="block w-56 my-2"> example@mail.com </span>
+                    <span class="block w-56 my-2"> alkarimiyyahma@gmail.com </span>
                 </div>
             </div>
             <iframe  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCfDVVOZ1UqWCYRaHKYvxQOQXWkomIU0O0&q=2W43+HW Beraji, Kabupaten Sumenep, Jawa Timur&zoom=12&center=-6.9948746,113.967751" allowfullscreen class="hidden md:block w-full h-[500px] rounded-md shadow-lg"></iframe>

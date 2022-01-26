@@ -3,7 +3,6 @@
         <MainNav class="text-gray-900" />
     </section>
 
-
     <section class="container pt-24 pb-12">
         <div class="mb-8">
             <h2
@@ -20,7 +19,7 @@
             </h2>
             <div class="container px-5 py-8 mx-auto flex flex-wrap">
                 <div class="flex flex-wrap w-full">
-                    <div class="md:w-1/2 lg:w-3/5 md:pr-10 md:py-6">
+                    <div class="md:w-1/2 md:pr-10 md:py-6">
                         <div class="flex relative pb-12">
                             <div
                                 class="
@@ -57,10 +56,7 @@
                                     z-10
                                 "
                             >
-                                <img
-                                    src="https://img.icons8.com/external-konkapp-outline-color-konkapp/64/000000/external-open-cafe-konkapp-outline-color-konkapp.png"
-                                    class="w-16"
-                                />
+                                <img src="/images/open.png" class="w-16" />
                             </div>
                             <div class="flex-grow pl-4">
                                 <h2
@@ -77,15 +73,19 @@
                                 </h2>
                                 <p class="leading-relaxed font-semibold">
                                     {{
-                                        new Date(
-                                            setting.open
-                                        ).toLocaleString("ID-id", {
-                                            timezone: "Asia/Jakarta",
-                                            weekday: "long",
-                                            year: "numeric",
-                                            month: "long",
-                                            day: "numeric",
-                                        })
+                                        new Date(setting.open).toLocaleString(
+                                            "ID-id",
+                                            {
+                                                timezone: "Asia/Jakarta",
+                                                weekday: "long",
+                                                year: "numeric",
+                                                month: "long",
+                                                day: "numeric",
+                                                hour12: false,
+                                                hour: 'numeric',
+                                                minute: 'numeric',
+                                            }
+                                        )
                                     }}
                                 </p>
                             </div>
@@ -127,10 +127,7 @@
                                     z-10
                                 "
                             >
-                                <img
-                                    src="https://img.icons8.com/officel/40/000000/edit-property.png"
-                                    class="w-16"
-                                />
+                                <img src="/images/register.png" class="w-16" />
                             </div>
                             <div class="flex-grow pl-4">
                                 <h2
@@ -146,27 +143,36 @@
                                     Tanggal pendaftaran
                                 </h2>
                                 <p class="leading-relaxed font-bold text-lg">
-                                   {{
-                                        new Date(
-                                            setting.open
-                                        ).toLocaleString("ID-id", {
-                                            timezone: "Asia/Jakarta",
-                                            weekday: "long",
-                                            year: "numeric",
-                                            month: "long",
-                                            day: "numeric",
-                                        })
-                                    }} - 
                                     {{
-                                        new Date(
-                                            setting.close
-                                        ).toLocaleString("ID-id", {
-                                            timezone: "Asia/Jakarta",
-                                            weekday: "long",
-                                            year: "numeric",
-                                            month: "long",
-                                            day: "numeric",
-                                        })
+                                        new Date(setting.open).toLocaleString(
+                                            "ID-id",
+                                            {
+                                                timezone: "Asia/Jakarta",
+                                                weekday: "long",
+                                                year: "numeric",
+                                                month: "long",
+                                                day: "numeric",
+                                                hour12: false,
+                                                hour: 'numeric',
+                                                minute: 'numeric',
+                                            }
+                                        )
+                                    }}
+                                    -
+                                    {{
+                                        new Date(setting.close).toLocaleString(
+                                            "ID-id",
+                                            {
+                                                timezone: "Asia/Jakarta",
+                                                weekday: "long",
+                                                year: "numeric",
+                                                month: "long",
+                                                day: "numeric",
+                                                hour12: false,
+                                                hour: 'numeric',
+                                                minute: 'numeric',
+                                            }
+                                        )
                                     }}
                                 </p>
                             </div>
@@ -207,10 +213,7 @@
                                     z-10
                                 "
                             >
-                                <img
-                                    src="https://img.icons8.com/external-prettycons-lineal-color-prettycons/49/000000/external-close-office-prettycons-lineal-color-prettycons.png"
-                                    class="w-16"
-                                />
+                                <img src="/images/close.png" class="w-16" />
                             </div>
                             <div class="flex-grow pl-4">
                                 <h2
@@ -227,15 +230,19 @@
                                 </h2>
                                 <p class="leading-relaxed font-semibold">
                                     {{
-                                        new Date(
-                                            setting.close
-                                        ).toLocaleString("ID-id", {
-                                            timezone: "Asia/Jakarta",
-                                            weekday: "long",
-                                            year: "numeric",
-                                            month: "long",
-                                            day: "numeric",
-                                        })
+                                        new Date(setting.close).toLocaleString(
+                                            "ID-id",
+                                            {
+                                                timezone: "Asia/Jakarta",
+                                                weekday: "long",
+                                                year: "numeric",
+                                                month: "long",
+                                                day: "numeric",
+                                                hour12: false,
+                                                hour: 'numeric',
+                                                minute: 'numeric',
+                                            }
+                                        )
                                     }}
                                 </p>
                             </div>
@@ -257,7 +264,7 @@
                                 "
                             >
                                 <img
-                                    src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/000000/external-megaphone-cyber-monday-vitaliy-gorbachev-lineal-color-vitaly-gorbachev-1.png"
+                                    src="/images/announcement.png"
                                     class="w-16"
                                 />
                             </div>
@@ -276,15 +283,20 @@
                                 </h2>
                                 <p class="leading-relaxed font-semibold">
                                     {{
-                                        new Date(
-                                            setting.announcement
-                                        ).toLocaleString("ID-id", {
-                                            timezone: "Asia/Jakarta",
-                                            weekday: "long",
-                                            year: "numeric",
-                                            month: "long",
-                                            day: "numeric",
-                                        })
+                                        setting.announcement
+                                            ? new Date(
+                                                  setting.announcement
+                                              ).toLocaleString("ID-id", {
+                                                  timezone: "Asia/Jakarta",
+                                                  weekday: "long",
+                                                  year: "numeric",
+                                                  month: "long",
+                                                  day: "numeric",
+                                                  hour12: false,
+                                                  hour: 'numeric',
+                                                  minute: 'numeric',
+                                              })
+                                            : "-"
                                     }}
                                 </p>
                             </div>
@@ -296,7 +308,6 @@
                         class="
                             mx-auto
                             w-4/5
-                            lg:w-2/5
                             md:w-1/2
                             object-contain object-center
                             rounded-lg
@@ -308,57 +319,54 @@
             </div>
         </div>
 
-        <div v-if="new Date(setting.close) >= new Date(current_date)" class="my-24">
-            <h2
-                class="
-                    text-3xl
-                    lg:text-4xl
-                    font-bold
-                    capitalize
-                    text-center
-                "
-            >
+        <div
+            v-if="
+                new Date(setting.close) >= new Date(current_date) &&
+                new Date(setting.open) <= new Date(current_date)
+            "
+            class="my-24"
+        >
+            <h2 class="text-3xl lg:text-4xl font-bold capitalize text-center">
                 Bergabunglah bersama kami
             </h2>
             <div class="container px-5 py-8 mx-auto flex flex-wrap">
-                <Link :href="route('ppdb.create')" class="btn btn-lg btn-primary mx-auto">
+                <Link
+                    :href="route('ppdb.create')"
+                    class="btn btn-lg btn-primary mx-auto"
+                >
                     Daftar sekarang
                 </Link>
             </div>
         </div>
+        <div v-else class="">
+            <h2 class="text-3xl lg:text-4xl font-bold capitalize text-center">
+                Pendaftaran ditutup
+            </h2>
+            <p class="text-lg text-center my-4">
+                pendaftaran dapat dilakukan di laman ini jika telah tersedia
+            </p>
+        </div>
 
         <div v-if="setting.announcement_url != null" class="my-24">
-            <h2
-                class="
-                    text-3xl
-                    lg:text-4xl
-                    font-bold
-                    capitalize
-                    text-center
-                "
-            >
+            <h2 class="text-3xl lg:text-4xl font-bold capitalize text-center">
                 Pengumuman
             </h2>
             <div class="container px-5 py-8 mx-auto flex flex-col">
-                <p class="text-center my-4">
+                <p class="text-lg text-center my-4">
                     Untuk dapat melihat hasil pengumuman dapat dilihat dengan
                     meng-klik tombol unduh berikut ini
                 </p>
-                <a :href="setting.announcement_url" target="_blank" class="btn btn-primary mx-auto">
+                <a
+                    :href="setting.announcement_url"
+                    target="_blank"
+                    class="btn btn-primary mx-auto"
+                >
                     Unduh Pengumuman
                 </a>
             </div>
         </div>
         <div v-else class="my-24">
-            <h2
-                class="
-                    text-3xl
-                    lg:text-4xl
-                    font-bold
-                    capitalize
-                    text-center
-                "
-            >
+            <h2 class="text-3xl lg:text-4xl font-bold capitalize text-center">
                 Pengumuman
             </h2>
             <div class="container px-5 py-8 mx-auto flex flex-col">
@@ -373,7 +381,6 @@
 </template>
 
 <script>
-
 import MainNav from "@/Components/MainNav.vue";
 import Footer from "@/Components/Footer.vue";
 import { Link } from "@inertiajs/inertia-vue3";
