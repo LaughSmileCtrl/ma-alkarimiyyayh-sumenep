@@ -32,45 +32,45 @@
                     </div>
                     <div class="my-3">
                         <ul class="list-none m-5" @click="hideDrawer">
-                            <li :class="linkSideBarClassify(route().current('dashboard.index'))"><Link :href="route('dashboard.index')" class="h-full w-full"> <i class="fas fa-home"></i> &nbsp; Dashboard</Link></li>
-                            <li :class="linkSideBarClassify(route().current('teachers.index'))"><Link :href="route('teachers.index')" class="h-full w-full"> <i class="fas fa-users"></i> &nbsp; Guru</Link></li>
+                            <li :class="linkSideBarClassify(route().current('dashboard.index'))"><Link :href="route('dashboard.index')" class="h-full w-full block"> <i class="fas fa-home"></i> &nbsp; Dashboard</Link></li>
+                            <li :class="linkSideBarClassify(route().current('teachers.index'))"><Link :href="route('teachers.index')" class="h-full w-full block"> <i class="fas fa-users"></i> &nbsp; Guru</Link></li>
                             <li>
                                 <ul class="border-y border-white">
                                     <li class="p-3 font-medium">Kesiswaan</li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('achivements.index'))"> <Link :href="route('achivements.index')" class="h-full w-full"><i class="fas fa-trophy w-5"></i> &nbsp; Prestasi</Link></li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('graduates.index'))"> <Link :href="route('graduates.index')" class="h-full w-full"><i class="fas fa-graduation-cap w-5"></i> &nbsp; Alumni</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('achivements.index'))"> <Link :href="route('achivements.index')" class="h-full w-full block"><i class="fas fa-trophy w-5"></i> &nbsp; Prestasi</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('graduates.index'))"> <Link :href="route('graduates.index')" class="h-full w-full block"><i class="fas fa-graduation-cap w-5"></i> &nbsp; Alumni</Link></li>
                                 </ul>
                                
                             </li>
                             <li>
                                 <ul class="border-y border-white">
                                     <li class="p-3 font-medium">Arsip</li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('gallery.index'))"> <Link :href="route('gallery.index')" class="h-full w-full"><i class="fas fa-border-all w-5"></i> &nbsp; Album</Link></li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('mail-in.index'))"> <Link :href="route('mail-in.index')" class="h-full w-full"><i class="fas fa-share w-5"></i> &nbsp; Surat Masuk</Link></li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('mail-out.index'))"> <Link :href="route('mail-out.index')" class="h-full w-full"><i class="fas fa-reply w-5"></i> &nbsp; Surat Keluar</Link></li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('certificates.index'))"> <Link :href="route('certificates.index')" class="h-full w-full"><i class="fas fa-file w-5"></i> &nbsp; Ijazah</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('gallery.index'))"> <Link :href="route('gallery.index')" class="h-full w-full block"><i class="fas fa-border-all w-5"></i> &nbsp; Album</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('mail-in.index'))"> <Link :href="route('mail-in.index')" class="h-full w-full block"><i class="fas fa-share w-5"></i> &nbsp; Surat Masuk</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('mail-out.index'))"> <Link :href="route('mail-out.index')" class="h-full w-full block"><i class="fas fa-reply w-5"></i> &nbsp; Surat Keluar</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('certificates.index'))"> <Link :href="route('certificates.index')" class="h-full w-full block"><i class="fas fa-file w-5"></i> &nbsp; Ijazah</Link></li>
                                 </ul>
                                
                             </li>
                             <li>
                                 <ul class="border-y border-white">
                                     <li class="p-3 font-medium">Artikel</li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('news-admin.index'))"><Link :href="route('news-admin.index')" class="h-full w-full"> <i class="fas fa-newspaper w-5"></i> &nbsp; Berita</Link></li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('student-creations-admin.index'))"><Link :href="route('student-creations-admin.index')" class="h-full w-full"> <i class="fas fa-file-alt w-5"></i> &nbsp; Karya Siswa</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('news-admin.index'))"><Link :href="route('news-admin.index')" class="h-full w-full block"> <i class="fas fa-newspaper w-5"></i> &nbsp; Berita</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('student-creations-admin.index'))"><Link :href="route('student-creations-admin.index')" class="h-full w-full block"> <i class="fas fa-file-alt w-5"></i> &nbsp; Karya Siswa</Link></li>
                                 </ul>
                             </li>
                             <li>
                                 <ul class="border-y border-white">
                                     <li class="p-3 font-medium">PPDB</li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('ppdb-admin.index'))"><Link :href="route('ppdb-admin.index')" class="h-full w-full"> <i class="fas fa-users w-5"></i> &nbsp; Data Masuk</Link></li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('ppdb-setting.index'))"><Link :href="route('ppdb-setting.index')" class="h-full w-full"> <i class="fas fa-cog w-5"></i> &nbsp; Pengaturan</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('ppdb-admin.index'))"><Link :href="route('ppdb-admin.index')" class="h-full w-full block"> <i class="fas fa-users w-5"></i> &nbsp; Data Masuk</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('ppdb-setting.index'))"><Link :href="route('ppdb-setting.index')" class="h-full w-full block"> <i class="fas fa-cog w-5"></i> &nbsp; Pengaturan</Link></li>
                                 </ul>
                             </li>
                         </ul>
                     </div>
                     <div class="m-5 mt-10">
                         <div class="w-full p-3">
-                            <Link href="" class="h-full w-full"> <i class="fas fa-sign-out-alt text-[#AD1010]"></i> &nbsp; Logout</Link>
+                            <button @click="$inertia.post(route('logout'))" class="h-full w-full text-left"> <i class="fas fa-sign-out-alt text-[#AD1010]"></i> &nbsp; Logout</button>
                         </div>
                     </div>
                 </div>

@@ -216,6 +216,10 @@ class PpdbController extends Controller
     {
         $registrar = Ppdb::findOrFail($id);
 
+        $registrar->date_of_birth = date('d/m/Y', strtotime($registrar->date_of_birth));
+        $registrar->father_date_of_birth = date('d/m/Y', strtotime($registrar->father_date_of_birth));
+        $registrar->mother_date_of_birth = date('d/m/Y', strtotime($registrar->mother_date_of_birth));
+
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadHTML(
         <<<EOT
@@ -232,47 +236,47 @@ class PpdbController extends Controller
             </tr>
             <tr>
                 <td>Nama lengkap</td>
-                <td>$registrar->name</td>
+                <td> $registrar->name </td>
             </tr>
             <tr>
                 <td>NISN</td>
-                <td>$registrar->nisn</td>
+                <td> $registrar->nisn </td>
             </tr>
             <tr>
                 <td>NIK</td>
-                <td>$registrar->nik</td>
+                <td> $registrar->nik </td>
             </tr>
             <tr>
                 <td>No. Kartu Keluarga</td>
-                <td>$registrar->no_kk</td>
+                <td> $registrar->no_kk </td>
             </tr>
             <tr>
                 <td>Tempat lahir</td>
-                <td>$registrar->place_of_birth</td>
+                <td> $registrar->place_of_birth </td>
             </tr>
             <tr>
                 <td>Tanggal lahir</td>
-                <td>$registrar->date_of_birth</td>
+                <td> $registrar->date_of_birth </td>
             </tr>
             <tr>
                 <td>Jenis kelamin</td>
-                <td>$registrar->gender</td>
+                <td> $registrar->gender </td>
             </tr>
             <tr>
                 <td>Anak ke-</td>
-                <td>$registrar->child_order</td>
+                <td> $registrar->child_order </td>
             </tr>
             <tr>
                 <td>Jumlah saudara</td>
-                <td>$registrar->total_brother</td>
+                <td> $registrar->total_brother </td>
             </tr>
             <tr>
                 <td>No. HP/WA</td>
-                <td>$registrar->phone</td>
+                <td> $registrar->phone </td>
             </tr>
             <tr>
                 <td>Alamat lengkap</td>
-                <td>$registrar->address</td>
+                <td> $registrar->address </td>
             </tr>
             <tr>
                 <td colspan="2">

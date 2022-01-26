@@ -20,7 +20,7 @@ class CreatePpdbsTable extends Migration
             $table->string('nik');
             $table->string('no_kk');
             $table->string('place_of_birth');
-            $table->datetime('date_of_birth');
+            $table->date('date_of_birth');
             $table->string('gender');
             $table->string('child_order');
             $table->string('total_brother');
@@ -29,7 +29,7 @@ class CreatePpdbsTable extends Migration
             $table->string('father_name');
             $table->string('father_nik');
             $table->string('father_place_of_birth');
-            $table->datetime('father_date_of_birth');
+            $table->date('father_date_of_birth');
             $table->string('father_last_education');
             $table->string('father_profession');
             $table->string('father_phone');
@@ -37,7 +37,7 @@ class CreatePpdbsTable extends Migration
             $table->string('mother_name');
             $table->string('mother_nik');
             $table->string('mother_place_of_birth');
-            $table->datetime('mother_date_of_birth');
+            $table->date('mother_date_of_birth');
             $table->string('mother_last_education');
             $table->string('mother_profession');
             $table->string('mother_phone');

@@ -85,47 +85,50 @@ Route::resource('document', DocumentController::class)
  * 
  */
 
-Route::resource('dashboard', DashboardController::class)
-    ->only(['index', 'store']);
-
-Route::resource('teachers', TeacherController::class)
-    ->except(['create', 'show', 'edit']);
-
-Route::resource('news-admin', NewsController::class);
-
-Route::resource('student-creations-admin', StudentCreationController::class);
-
-Route::resource('graduates', GraduateController::class)
-    ->except(['create', 'show', 'edit']);
-
-Route::resource('gallery', GalleryController::class)
-    ->except(['create', 'show', 'edit']);
-
-Route::resource('achivements', AchivementController::class)
-    ->except(['create', 'show', 'edit']);
-
-Route::resource('mail-in', MailInController::class)
-    ->except(['create', 'edit']);
-
-Route::resource('mail-out', MailOutController::class)
-    ->except(['create', 'edit']);
-
-Route::resource('certificates', CertificateController::class)
-    ->except(['create', 'edit']);
-
-Route::get('ppdb-admin/{id}/pdf', [PpdbController::class, 'toPdf'])
-    ->name('ppdb-admin.topdf');
-
-Route::delete('ppdb-admin/destroy-all', [PpdbController::class, 'deleteAll'])
-    ->name('ppdb-admin.destroy-all');
-
-Route::get('ppdb-admin/export-all', [PpdbController::class, 'exportAll'])
-    ->name('ppdb-admin.export-all');
+Route::middleware(['web', 'auth'])->group(function() {
+    Route::resource('dashboard', DashboardController::class)
+        ->only(['index', 'store']);
     
-Route::resource('ppdb-admin', PpdbController::class);
+    Route::resource('teachers', TeacherController::class)
+        ->except(['create', 'show', 'edit']);
+    
+    Route::resource('news-admin', NewsController::class);
+    
+    Route::resource('student-creations-admin', StudentCreationController::class);
+    
+    Route::resource('graduates', GraduateController::class)
+        ->except(['create', 'show', 'edit']);
+    
+    Route::resource('gallery', GalleryController::class)
+        ->except(['create', 'show', 'edit']);
+    
+    Route::resource('achivements', AchivementController::class)
+        ->except(['create', 'show', 'edit']);
+    
+    Route::resource('mail-in', MailInController::class)
+        ->except(['create', 'edit']);
+    
+    Route::resource('mail-out', MailOutController::class)
+        ->except(['create', 'edit']);
+    
+    Route::resource('certificates', CertificateController::class)
+        ->except(['create', 'edit']);
+    
+    Route::get('ppdb-admin/{id}/pdf', [PpdbController::class, 'toPdf'])
+        ->name('ppdb-admin.topdf');
+    
+    Route::delete('ppdb-admin/destroy-all', [PpdbController::class, 'deleteAll'])
+        ->name('ppdb-admin.destroy-all');
+    
+    Route::get('ppdb-admin/export-all', [PpdbController::class, 'exportAll'])
+        ->name('ppdb-admin.export-all');
+        
+    Route::resource('ppdb-admin', PpdbController::class);
+    
+    Route::resource('ppdb-setting', PpdbSettingController::class)
+        ->only(['index', 'store']);
+});
 
-Route::resource('ppdb-setting', PpdbSettingController::class)
-    ->only(['index', 'store']);
 
 
 require __DIR__.'/auth.php';

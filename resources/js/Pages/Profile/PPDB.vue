@@ -73,19 +73,21 @@
                                 </h2>
                                 <p class="leading-relaxed font-semibold">
                                     {{
-                                        new Date(setting.open).toLocaleString(
-                                            "ID-id",
-                                            {
-                                                timezone: "Asia/Jakarta",
-                                                weekday: "long",
-                                                year: "numeric",
-                                                month: "long",
-                                                day: "numeric",
-                                                hour12: false,
-                                                hour: 'numeric',
-                                                minute: 'numeric',
-                                            }
-                                        )
+                                        setting.open
+                                            ? new Date(setting.open).toLocaleString(
+                                                    "ID-id",
+                                                    {
+                                                        timezone: "Asia/Jakarta",
+                                                        weekday: "long",
+                                                        year: "numeric",
+                                                        month: "long",
+                                                        day: "numeric",
+                                                        hour12: false,
+                                                        hour: 'numeric',
+                                                        minute: 'numeric',
+                                                    }
+                                                )
+                                            : '-'
                                     }}
                                 </p>
                             </div>
@@ -144,35 +146,39 @@
                                 </h2>
                                 <p class="leading-relaxed font-bold text-lg">
                                     {{
-                                        new Date(setting.open).toLocaleString(
-                                            "ID-id",
-                                            {
-                                                timezone: "Asia/Jakarta",
-                                                weekday: "long",
-                                                year: "numeric",
-                                                month: "long",
-                                                day: "numeric",
-                                                hour12: false,
-                                                hour: 'numeric',
-                                                minute: 'numeric',
-                                            }
-                                        )
+                                        setting.open
+                                            ? new Date(setting.open).toLocaleString(
+                                                    "ID-id",
+                                                    {
+                                                        timezone: "Asia/Jakarta",
+                                                        weekday: "long",
+                                                        year: "numeric",
+                                                        month: "long",
+                                                        day: "numeric",
+                                                        hour12: false,
+                                                        hour: 'numeric',
+                                                        minute: 'numeric',
+                                                    }
+                                                )
+                                            : ''
                                     }}
                                     -
                                     {{
-                                        new Date(setting.close).toLocaleString(
-                                            "ID-id",
-                                            {
-                                                timezone: "Asia/Jakarta",
-                                                weekday: "long",
-                                                year: "numeric",
-                                                month: "long",
-                                                day: "numeric",
-                                                hour12: false,
-                                                hour: 'numeric',
-                                                minute: 'numeric',
-                                            }
-                                        )
+                                        setting.close
+                                            ? new Date(setting.close).toLocaleString(
+                                                    "ID-id",
+                                                    {
+                                                        timezone: "Asia/Jakarta",
+                                                        weekday: "long",
+                                                        year: "numeric",
+                                                        month: "long",
+                                                        day: "numeric",
+                                                        hour12: false,
+                                                        hour: 'numeric',
+                                                        minute: 'numeric',
+                                                    }
+                                                )
+                                            : ''
                                     }}
                                 </p>
                             </div>
@@ -230,19 +236,21 @@
                                 </h2>
                                 <p class="leading-relaxed font-semibold">
                                     {{
-                                        new Date(setting.close).toLocaleString(
-                                            "ID-id",
-                                            {
-                                                timezone: "Asia/Jakarta",
-                                                weekday: "long",
-                                                year: "numeric",
-                                                month: "long",
-                                                day: "numeric",
-                                                hour12: false,
-                                                hour: 'numeric',
-                                                minute: 'numeric',
-                                            }
-                                        )
+                                        setting.close
+                                            ? new Date(setting.close).toLocaleString(
+                                                    "ID-id",
+                                                    {
+                                                        timezone: "Asia/Jakarta",
+                                                        weekday: "long",
+                                                        year: "numeric",
+                                                        month: "long",
+                                                        day: "numeric",
+                                                        hour12: false,
+                                                        hour: 'numeric',
+                                                        minute: 'numeric',
+                                                    }
+                                                )
+                                            : '-'
                                     }}
                                 </p>
                             </div>

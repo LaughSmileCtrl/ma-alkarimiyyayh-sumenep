@@ -16,9 +16,9 @@ class PpdbSettingSeeder extends Seeder
     {
         DB::table('ppdb_settings')
             ->insert([
-                'open' => '2022-01-01',
-                'close' => '2022-01-01',
-                'announcement' => '2022-01-01',
+                'open' => null,
+                'close' => null,
+                'announcement' => null,
                 'announcement_url' => null,
                 'image' => null,
             ]);
