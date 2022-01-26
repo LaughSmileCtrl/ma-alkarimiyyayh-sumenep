@@ -109,7 +109,7 @@
                                     <li class="w-full">
                                         <SideSubmenu>
                                             <template #menu>
-                                                Profile &#9662;
+                                                Profil &#9662;
                                             </template>
                                             <template #submenu>
                                                 <MenuItem :class="'px-4 py-2 w-full block ' + activeClass(route().current('history'))"><Link :href="route('history')" class="w-full h-full block">Sejarah</Link></MenuItem>

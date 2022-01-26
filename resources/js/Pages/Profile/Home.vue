@@ -63,8 +63,8 @@
                             p-5
                             lg:p-12
                             bg-white
-                            backdrop-filter backdrop-blur
-                            bg-opacity-30
+                            backdrop-filter backdrop-blur-lg
+                            bg-opacity-20
                         "
                     >
                         <h2 class="text-3xl lg:text-4xl mb-2 lg:mb-8">
@@ -122,14 +122,19 @@
                         opacity-70
                     "
                 />
-                <div class="container relative h-full w-full flex items-end lg:items-center">
-                    <div
-                        class="
-                            text-center text-white
-                            w-full
-                        "
-                    >
-                        <div 
+                <div
+                    class="
+                        container
+                        relative
+                        h-full
+                        w-full
+                        flex
+                        items-end
+                        lg:items-center
+                    "
+                >
+                    <div class="text-center text-white w-full">
+                        <div
                             class="
                                 mx-auto
                                 p-6
@@ -212,7 +217,7 @@
 
     <section
         v-if="news || student_creation"
-        class="my-16 bg-green-50 py-24 skew-y-6 lg:skew-y-3"
+        class="my-16 bg-green-50 py-36 skew-y-6 lg:skew-y-3"
     >
         <div
             class="
@@ -271,14 +276,10 @@
                             lg:h-60
                             p-6
                             text-white
-                            lg:text-transparent
-                            hover:text-white
                             relative
                             bg-gradient-to-t
                             from-gray-900
                             to-transparent
-                            lg:from-transparent
-                            hover:from-gray-900 hover:to-transparent
                             -mt-44
                             md:-mt-56
                             lg:-mt-60
@@ -355,14 +356,10 @@
                             lg:h-60
                             p-6
                             text-white
-                            lg:text-transparent
-                            hover:text-white
                             relative
                             bg-gradient-to-t
                             from-gray-900
                             to-transparent
-                            lg:from-transparent
-                            hover:from-gray-900 hover:to-transparent
                             -mt-44
                             md:-mt-56
                             lg:-mt-60
@@ -411,7 +408,15 @@
             "
         >
             <div
-                class="flex flex-col items-center h-fit w-fit shadow-xl shadow-green-100/60 rounded-lg p-4"
+                class="
+                    flex flex-col
+                    items-center
+                    h-fit
+                    w-fit
+                    shadow-xl shadow-green-100/60
+                    rounded-lg
+                    p-4
+                "
             >
                 <div class="pt-2 rounded-md">
                     <svg
@@ -435,7 +440,15 @@
                 <h3 class="text-center text-sm">Jumlah Guru</h3>
             </div>
             <div
-                class="flex flex-col items-center h-fit w-fit shadow-xl shadow-green-100/60 rounded-lg p-4"
+                class="
+                    flex flex-col
+                    items-center
+                    h-fit
+                    w-fit
+                    shadow-xl shadow-green-100/60
+                    rounded-lg
+                    p-4
+                "
             >
                 <div class="pt-2 rounded-md">
                     <svg
@@ -459,7 +472,15 @@
                 <h3 class="text-center text-sm">Jumlah Siswa</h3>
             </div>
             <div
-                class="flex flex-col items-center h-fit w-fit shadow-xl shadow-green-100/60 rounded-lg p-4 "
+                class="
+                    flex flex-col
+                    items-center
+                    h-fit
+                    w-fit
+                    shadow-xl shadow-green-100/60
+                    rounded-lg
+                    p-4
+                "
             >
                 <div class="pt-2 rounded-md">
                     <svg
