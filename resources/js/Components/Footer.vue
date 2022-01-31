@@ -5,7 +5,7 @@
             <div class="container  flex flex-col md:flex-row gap-y-8 lg:gap-16 justify-center">
                 <div class="flex flex-col items-center md:items-start">
                     <img
-                        src="images/logo.png"
+                        src="/images/logo.png"
                         alt=""
                         class="w-24 my-3"
                     />

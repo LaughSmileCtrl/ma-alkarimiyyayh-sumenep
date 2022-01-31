@@ -14,7 +14,7 @@
                                     </div>
                                 </div>
                                 <div class="lg:ml-72">
-                                    <h2 class="font-semibold text-xl text-gray-600 leading-tight uppercase">
+                                    <h2 class="font-semibold text-xl text-gray-600 leading-tight uppercase ml-4">
                                         <slot name="header" />
                                     </h2>
                                 </div>
@@ -33,7 +33,7 @@
                     <div class="my-3">
                         <ul class="list-none m-5" @click="hideDrawer">
                             <li :class="linkSideBarClassify(route().current('dashboard.index'))"><Link :href="route('dashboard.index')" class="h-full w-full block"> <i class="fas fa-home"></i> &nbsp; Dashboard</Link></li>
-                            <li :class="linkSideBarClassify(route().current('teachers.index'))"><Link :href="route('teachers.index')" class="h-full w-full block"> <i class="fas fa-users"></i> &nbsp; Guru</Link></li>
+                            <li :class="linkSideBarClassify(route().current('teachers.index'))"><Link :href="route('teachers.index')" class="h-full w-full block"> <i class="fas fa-user-tie"></i> &nbsp; Guru</Link></li>
                             <li>
                                 <ul class="border-y border-white">
                                     <li class="p-3 font-medium">Kesiswaan</li>
@@ -48,7 +48,7 @@
                                     <li :class="'ml-4 ' + linkSideBarClassify(route().current('gallery.index'))"> <Link :href="route('gallery.index')" class="h-full w-full block"><i class="fas fa-border-all w-5"></i> &nbsp; Album</Link></li>
                                     <li :class="'ml-4 ' + linkSideBarClassify(route().current('mail-in.index'))"> <Link :href="route('mail-in.index')" class="h-full w-full block"><i class="fas fa-share w-5"></i> &nbsp; Surat Masuk</Link></li>
                                     <li :class="'ml-4 ' + linkSideBarClassify(route().current('mail-out.index'))"> <Link :href="route('mail-out.index')" class="h-full w-full block"><i class="fas fa-reply w-5"></i> &nbsp; Surat Keluar</Link></li>
-                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('certificates.index'))"> <Link :href="route('certificates.index')" class="h-full w-full block"><i class="fas fa-file w-5"></i> &nbsp; Ijazah</Link></li>
+                                    <li :class="'ml-4 ' + linkSideBarClassify(route().current('certificates.index'))"> <Link :href="route('certificates.index')" class="h-full w-full block"><i class="fas fa-file w-5"></i> &nbsp; Dokumen Madrasah</Link></li>
                                 </ul>
                                
                             </li>

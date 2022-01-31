@@ -2,7 +2,7 @@
     <section class="max-w-screen">
         <MainNav class="text-gray-900" />
     </section>
-    <section class="container pt-24 pb-12 min-h-screen">
+    <section class="container pt-36 pb-12 min-h-screen">
         <h2 class="text-3xl lg:text-4xl font-bold uppercase text-center my-6">
             {{ title }}
         </h2>
@@ -40,8 +40,8 @@
         </div>
         <div class="flex gap-6 flex-wrap items-center justify-center">
             <Link
-                v-for="(news, i) in articles.data"
-                :href="route('news.show', news.id)"
+                v-for="(article, i) in articles.data"
+                :href="`${articles.path}/${article.id}/show/${article.title.replaceAll(' ', '-').toLowerCase()}`"
                 :key="i"
                 class="
                     w-56
@@ -57,7 +57,7 @@
                 "
             >
                 <img
-                    :src="'/images/article/' + news.image"
+                    :src="'/images/article/' + article.image"
                     alt=""
                     class="
                         object-cover
@@ -95,11 +95,11 @@
                     "
                 >
                     <h2 class="text-xl break-words line-clamp-2">
-                        {{ news.title }}
+                        {{ article.title }}
                     </h2>
                     <p class="text-xs">
                         {{
-                            new Date(news.created_at).toLocaleString("ID-id", {
+                            new Date(article.created_at).toLocaleString("ID-id", {
                                 timezone: "Asia/Jakarta",
                                 weekday: "long",
                                 year: "numeric",
@@ -109,7 +109,7 @@
                         }}
                     </p>
                     <p class="text-xs mt-2">
-                        {{ news.author }}
+                        {{ article.author }}
                     </p>
                     <p class="text-xs mt-2 text-right">
                         selengkapnya &nbsp;<i

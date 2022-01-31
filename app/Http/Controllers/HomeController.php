@@ -22,11 +22,13 @@ class HomeController extends Controller
             ->first()
             ->id;
 
-        $news = Article::where('type_id', $newsId)
+        $news = Article::select('id','title', 'author', 'image','created_at')
+            ->where('type_id', $newsId)
             ->orderBy('created_at', 'desc')
             ->first();
 
-        $studentCreation = Article::where('type_id', $studentCreationId)
+        $studentCreation = Article::select('id','title', 'author', 'image','created_at')
+            ->where('type_id', $studentCreationId)
             ->orderBy('created_at', 'desc')
             ->first();
         

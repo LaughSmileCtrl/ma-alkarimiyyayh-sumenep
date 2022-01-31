@@ -1,6 +1,6 @@
 <template>
     <section class="bg-green-900 h-screen max-w-screen">
-        <MainNav class="text-white" />
+        <MainNav class="text-white" :background="false" />
 
         <HeroCarousel>
             <SwiperSlide>
@@ -195,7 +195,7 @@
                         class="w-16 lg:w-24"
                     />
                 </div>
-                <p class="">
+                <p class="text-justify">
                     Madrasah Aliyah Al-Karimiyyah telah terakreditasi dengan
                     nilai 91 dengan predikat A, hal tersebut tertuang dalam
                     Sertifikat Akreditasi yang dikeluaran oleh Badan Akreditasi
@@ -234,7 +234,7 @@
             <div v-if="news" class="-mt-28">
                 <h2 class="text-2xl text-center my-4">Berita Terbaru</h2>
                 <Link
-                    :href="route('news.show', news.id)"
+                    :href="route('news.show', {id: news.id, title: news.title.replaceAll(' ', '-').toLowerCase()})"
                     class="
                         w-56
                         md:w-72
@@ -314,7 +314,7 @@
             <div v-if="student_creation" class="-mb-16">
                 <h2 class="text-2xl text-center my-4">Karya Siswa Terbaru</h2>
                 <Link
-                    :href="route('student-creations.show', student_creation.id)"
+                    :href="route('student-creations.show', {id: student_creation.id, title: student_creation.title.replaceAll(' ', '-').toLowerCase()})"
                     class="
                         w-56
                         md:w-72

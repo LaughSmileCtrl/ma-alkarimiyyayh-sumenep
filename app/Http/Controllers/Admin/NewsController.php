@@ -70,9 +70,9 @@ class NewsController extends Controller
     }
 
 
-    public function show($id)
+    public function show($id, $title)
     {
-        return redirect()->action([GuestNewsController::class, 'show'], ['news'=> $id]);
+        return redirect()->action([GuestNewsController::class, 'show'], ['id'=> $id, 'title' => $title]);
 
     }
 
@@ -101,7 +101,9 @@ class NewsController extends Controller
 
         $article->update($newsForm);
 
+        
         if ($request->image) {
+
             $newImage = $request->image->store('images/article');
             $newImage = str_replace('images/article/', '', $newImage);
 
@@ -109,12 +111,7 @@ class NewsController extends Controller
 
             $article->image = $newImage;
             $article->save();
-        } else if ($article->image != 'default.png') {
-            Storage::delete('images/article/'.$article->image);
-
-            $article->image = 'default.png';
-            $article->save();
-        }
+        } 
 
         return back()->with([
             'message' => 'Berita berhasil diubah',

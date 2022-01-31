@@ -32,7 +32,7 @@ class CertificateController extends Controller
             ->paginate(25);
 
         return Inertia::render('Admin/ListCertificate', [
-            'title' => 'Ijazah',
+            'title' => 'Dokumen Madrasah',
             'visibilityOption' => false,
             'years' => $years,
             'files' => $files,

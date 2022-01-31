@@ -2,7 +2,7 @@
     <section class="max-w-screen">
         <MainNav class="text-gray-900" />
     </section>
-    <section class="container pt-24 pb-12">
+    <section class="container pt-36 pb-12">
         <h2 class="text-3xl lg:text-4xl font-bold uppercase text-center my-6">
             Karya Siswa
         </h2>

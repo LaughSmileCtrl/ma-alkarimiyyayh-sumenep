@@ -14,9 +14,9 @@ class PpdbSettingController extends Controller
     {
         $setting = PpdbSetting::first()->toArray();
 
-        $setting['open'] = date('Y-m-d\TH:i', strtotime($setting['open']));
-        $setting['close'] = date('Y-m-d\TH:i', strtotime($setting['close']));
-        $setting['announcement'] = date('Y-m-d\TH:i', strtotime($setting['announcement']));
+        $setting['open'] = date('Y-m-d', strtotime($setting['open']));
+        $setting['close'] = date('Y-m-d', strtotime($setting['close']));
+        $setting['announcement'] = date('Y-m-d', strtotime($setting['announcement']));
 
         return Inertia::render('Admin/PPDB/Settings', [
             'setting' => $setting,
@@ -26,6 +26,8 @@ class PpdbSettingController extends Controller
     public function store(Request $request)
     {
         $settingRequest = $request->all();
+
+        $settingRequest['close'] .= ' 23:59';
 
         $ppdbSetting = PpdbSetting::first();
 

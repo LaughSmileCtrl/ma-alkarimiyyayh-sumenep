@@ -9,7 +9,7 @@
                 md:flex-row-reverse
                 gap-8
                 flex-wrap
-                pt-24
+                pt-36
                 pb-16
                 text-gray-700
                 items-center

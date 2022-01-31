@@ -3,7 +3,7 @@
         <MainNav class="text-gray-900" />
     </section>
 
-    <section class="container pt-24 pb-12 min-h-screen">
+    <section class="container pt-36 pb-12 min-h-screen">
         <h2 class="text-3xl lg:text-4xl font-bold uppercase text-center my-8">
             Data Alumni
         </h2>

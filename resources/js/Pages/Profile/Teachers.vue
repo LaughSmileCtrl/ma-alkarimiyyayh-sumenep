@@ -4,7 +4,7 @@
     </section>
 
     <section class="container min-h-screen">
-        <div class="flex flex-col gap-8 flex-wrap items-center pt-24 pb-16">
+        <div class="flex flex-col gap-8 flex-wrap items-center pt-36 pb-16">
             <h2
                 class="
                     text-3xl

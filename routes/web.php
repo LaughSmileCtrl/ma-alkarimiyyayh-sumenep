@@ -65,11 +65,17 @@ Route::resource('achivement', GuestAchivementController::class)
 Route::resource('graduate', GuestGraduateController::class)
     ->only('index');
 
+Route::get('news/{id}/show/{title?}', [GuestNewsController::class, 'show'])
+    ->name('news.show');
+
 Route::resource('news', GuestNewsController::class)
-    ->only(['index', 'show']);
+    ->only('index');
+
+Route::get('student-creations/{id}/show/{title?}', [GuestStudentCreationController::class, 'show'])
+    ->name('student-creations.show');
 
 Route::resource('student-creations', GuestStudentCreationController::class)
-    ->only(['index', 'show']);
+    ->only('index');
 
 Route::resource('ppdb', GuestPpdbController::class)
     ->only(['index', 'create', 'store']);
@@ -91,10 +97,18 @@ Route::middleware(['web', 'auth'])->group(function() {
     
     Route::resource('teachers', TeacherController::class)
         ->except(['create', 'show', 'edit']);
+
+    Route::get('news-admin/{id}/show/{title?}', [NewsController::class, 'show'])
+        ->name('news-admin.show');
     
-    Route::resource('news-admin', NewsController::class);
+    Route::resource('news-admin', NewsController::class)
+        ->except('show');
     
-    Route::resource('student-creations-admin', StudentCreationController::class);
+    Route::get('student-creations-admin/{id}/show/{title?}', [StudentCreationController::class, 'show'])
+        ->name('student-creations-admin.show');
+
+    Route::resource('student-creations-admin', StudentCreationController::class)
+        ->except('show');
     
     Route::resource('graduates', GraduateController::class)
         ->except(['create', 'show', 'edit']);

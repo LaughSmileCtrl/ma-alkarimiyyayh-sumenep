@@ -3,7 +3,7 @@
         <MainNav class="text-gray-900" />
     </section>
 
-    <section class="container pt-24 pb-12">
+    <section class="container pt-36 pb-12">
         <div class="mb-8">
             <h2
                 class="
@@ -82,9 +82,6 @@
                                                         year: "numeric",
                                                         month: "long",
                                                         day: "numeric",
-                                                        hour12: false,
-                                                        hour: 'numeric',
-                                                        minute: 'numeric',
                                                     }
                                                 )
                                             : '-'
@@ -131,12 +128,12 @@
                             >
                                 <img src="/images/register.png" class="w-16" />
                             </div>
-                            <div class="flex-grow pl-4">
+                            <div class="flex-grow p-5 ml-4 border-2 rounded-lg text">
                                 <h2
                                     class="
                                         font-bold
                                         title-font
-                                        text-md text-gray-900
+                                        text-lg text-gray-900
                                         mb-1
                                         tracking-wider
                                         uppercase
@@ -144,7 +141,7 @@
                                 >
                                     Tanggal pendaftaran
                                 </h2>
-                                <p class="leading-relaxed font-bold text-lg">
+                                <p class="leading-relaxed font-semibold text-lg">
                                     {{
                                         setting.open
                                             ? new Date(setting.open).toLocaleString(
@@ -155,14 +152,11 @@
                                                         year: "numeric",
                                                         month: "long",
                                                         day: "numeric",
-                                                        hour12: false,
-                                                        hour: 'numeric',
-                                                        minute: 'numeric',
                                                     }
                                                 )
                                             : ''
                                     }}
-                                    -
+                                    - <br />
                                     {{
                                         setting.close
                                             ? new Date(setting.close).toLocaleString(
@@ -173,9 +167,6 @@
                                                         year: "numeric",
                                                         month: "long",
                                                         day: "numeric",
-                                                        hour12: false,
-                                                        hour: 'numeric',
-                                                        minute: 'numeric',
                                                     }
                                                 )
                                             : ''
@@ -245,9 +236,6 @@
                                                         year: "numeric",
                                                         month: "long",
                                                         day: "numeric",
-                                                        hour12: false,
-                                                        hour: 'numeric',
-                                                        minute: 'numeric',
                                                     }
                                                 )
                                             : '-'
@@ -300,9 +288,6 @@
                                                   year: "numeric",
                                                   month: "long",
                                                   day: "numeric",
-                                                  hour12: false,
-                                                  hour: 'numeric',
-                                                  minute: 'numeric',
                                               })
                                             : "-"
                                     }}
@@ -351,7 +336,7 @@
                 Pendaftaran ditutup
             </h2>
             <p class="text-lg text-center my-4">
-                pendaftaran dapat dilakukan di laman ini jika telah tersedia
+                Pendaftaran dapat dilakukan di laman ini jika telah tersedia
             </p>
         </div>
 
@@ -379,7 +364,7 @@
             </h2>
             <div class="container px-5 py-8 mx-auto flex flex-col">
                 <p class="text-lg text-center my-4">
-                    pengumuman dapat diunduh di laman ini jika telah tersedia
+                    Pengumuman dapat diunduh di laman ini jika telah tersedia
                 </p>
             </div>
         </div>

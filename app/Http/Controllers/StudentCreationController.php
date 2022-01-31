@@ -29,6 +29,10 @@ class StudentCreationController extends Controller
 
     public function show($id)
     {
-        return redirect()->action([NewsController::class, 'show'], ['news' => $id]);
+        $article = Article::findOrFail($id);
+
+        return Inertia::render('Profile/ArticleDetail', [
+            'article' => $article,
+        ]);
     }
 }

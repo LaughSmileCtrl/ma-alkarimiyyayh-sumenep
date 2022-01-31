@@ -12,19 +12,19 @@
                     <label class="label">
                         <span class="label-text">Tanggal Buka</span>
                     </label> 
-                    <input v-model="form.open" type="datetime-local" class="input input-primary input-bordered">
+                    <input v-model="form.open" type="date" class="input input-primary input-bordered">
                 </div>
                 <div class="form-control">
                     <label class="label">
                         <span class="label-text">Tanggal Tutup</span>
                     </label> 
-                    <input v-model="form.close" type="datetime-local" class="input input-primary input-bordered">
+                    <input v-model="form.close" type="date" class="input input-primary input-bordered">
                 </div>
                 <div class="form-control">
                     <label class="label">
                         <span class="label-text">Tanggal Pengumuman</span>
                     </label> 
-                    <input v-model="form.announcement" type="datetime-local" class="input input-primary input-bordered">
+                    <input v-model="form.announcement" type="date" class="input input-primary input-bordered">
                 </div>
                 <div class="form-control">
                     <label class="label">

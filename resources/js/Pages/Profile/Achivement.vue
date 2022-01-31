@@ -2,7 +2,7 @@
     <section class="max-w-screen">
         <MainNav class="text-gray-900" />
     </section>
-    <section class="container pt-24 pb-12 min-h-screen">
+    <section class="container pt-36 pb-12 min-h-screen">
         <h2 class="text-3xl lg:text-4xl font-bold uppercase text-center my-8">Data Prestasi</h2>
         <div class="flex gap-10 flex-wrap justify-center">
             <div v-for="(achivement, i) in achivements.data" :key="i" class="w-56 text-center">

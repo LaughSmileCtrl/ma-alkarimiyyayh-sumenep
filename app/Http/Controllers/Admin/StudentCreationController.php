@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\NewsController;
+use App\Http\Controllers\StudentCreationController as GuestStudentCreationController;
 use App\Http\Requests\Admin\StoreArticleRequest;
 use App\Models\Article;
 use App\Models\ArticleCategory;
@@ -69,9 +69,9 @@ class StudentCreationController extends Controller
     }
 
 
-    public function show($id)
+    public function show($id, $title)
     {
-        return redirect()->action([NewsController::class, 'show'], ['news' => $id]);
+        return redirect()->action([GuestStudentCreationController::class, 'show'], ['id' => $id, 'title' => $title]);
     }
 
 
@@ -107,11 +107,6 @@ class StudentCreationController extends Controller
             Storage::delete('images/article/'.$article->image);
 
             $article->image = $newImage;
-            $article->save();
-        } else if ($article->image != 'default.png') {
-            Storage::delete('images/article/'.$article->image);
-
-            $article->image = 'default.png';
             $article->save();
         }
 

@@ -3,7 +3,7 @@
         <MainNav class="text-gray-900" />
     </section>
     <section class="container min-h-screen">
-        <div class="flex flex-col gap-8 pt-24 pb-2">
+        <div class="flex flex-col gap-8 pt-36 pb-2">
             <h2
                 class="
                     text-3xl
@@ -34,7 +34,7 @@
             </div>
 
             <img :src="'/images/article/' + article.image" alt="" class="rounded-md" />
-            <div class="leading-relaxed md:text-lg list-decimal" v-html="article.content" />
+            <div class="leading-relaxed md:text-lg text-justify" v-html="article.content" />
         </div>
     </section>
 

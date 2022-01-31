@@ -3,7 +3,7 @@
        <MainNav class="text-gray-900"/>
     </section>
     <section class="container">
-        <div class="flex flex-col gap-8 flex-wrap items-center pt-24 pb-16">
+        <div class="flex flex-col gap-8 flex-wrap items-center pt-36 pb-16">
             <img
                 src="https://events.enderuncolleges.com/wp-content/uploads/2019/03/image1-3-825x510.jpg"
                 alt=""

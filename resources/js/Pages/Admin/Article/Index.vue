@@ -52,7 +52,7 @@
                             <td>{{ article.author }}</td>
                             <td class="flex flex-row gap-2">
                                 <div data-tip="lihat detail" class="tooltip tooltip-bottom">
-                                    <a :href="articles.path+'/'+ article.id" target="_blank" class="btn btn-accent btn-sm"><i class="fas fa-external-link-alt"></i></a>
+                                    <a :href="`${articles.path}/${article.id}/show/${article.title.replaceAll(' ', '-').toLowerCase()}`" target="_blank" class="btn btn-accent btn-sm"><i class="fas fa-external-link-alt"></i></a>
                                 </div>
                                 <div data-tip="edit" class="tooltip tooltip-bottom">
                                     <Link :href="articles.path+'/' + article.id + '/edit'" class="btn btn-secondary btn-sm"><i class="fas fa-pen"></i></Link>

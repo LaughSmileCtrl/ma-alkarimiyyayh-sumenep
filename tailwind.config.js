@@ -68,8 +68,8 @@ module.exports = {
         themes: [
           {
             'mytheme': {                          /* your theme name */
-               'primary' : '#2ECC71',           /* Primary color */
-               'primary-focus' : '#0ba84f',     /* Primary color - focused */
+               'primary' : '#029523',           /* Primary color */
+               'primary-focus' : '#55b269',     /* Primary color - focused */
                'primary-content' : '#ffffff',   /* Foreground content color to use on primary color */
     
                'secondary' : '#f6d860',         /* Secondary color */
