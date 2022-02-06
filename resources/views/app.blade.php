@@ -4,7 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="description" content="madrasah aliyah al-karimiyyah baraji sumenep ">
+        <meta name="description" content="Madrasah Hebat Bermartabat, Madrasah Aliyah Al-Karimiyyah Jalan Raya Gapura, Desa Beraji Kec. Gapura Kab. Sumenep Prov. Jawa Timur 69472">
+
+        <meta property="og:title" content="{{ config('app.name', 'MA AL-KARIMIYYAH SUMENEP') }}">
+        <meta property="og:description" content="Madrasah Hebat Bermartabat, Madrasah Aliyah Al-Karimiyyah Jalan Raya Gapura, Desa Beraji Kec. Gapura Kab. Sumenep Prov. Jawa Timur 69472">
+        <meta property="og:image" content="https://maalkarimiyyah.sch.id/images/logo.png">
+
 
         <title inertia>{{ config('app.name', 'MA AL-KARIMIYYAH SUMENEP') }}</title>
 
